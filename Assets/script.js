@@ -3,9 +3,9 @@ food = false;
 hotels = false;
 /*active slot*/
 var checkRides = document.getElementById("rides");
-var checkFood = document.getElementById("food");
-var checkHotels = document.getElementById("hotels");
 
+var checkHotels = document.getElementById("hotels");
+var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
 
@@ -35,6 +35,8 @@ var active = document.getElementById("holder");
     });
     
     /******************************/
+ 
+    
     checkFood.addEventListener("click", function(){
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){

@@ -1,15 +1,28 @@
-/*.mainDiv{
-    /*display: flex;
-    justify-content: center;
-}*/
-h3{
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 20px;
 
+h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+}
+p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+h3{
+    font-family: 'Nunito Sans',re sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+
+}
+h4{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    width: 170px;
+    text-align: center;
 }
 .blackGutterOne{
     background-color: black;
-    /*position: sticky;*/
     height: 2000px;
     position: fixed;
     width: 50px;
@@ -17,7 +30,6 @@ h3{
 }
 .blackGutterTwo{
     background-color: black;
-    /*position: sticky;*/
     height: 2000px;
     position: fixed;
     width: 50px;
@@ -32,23 +44,16 @@ h3{
     border:  1px solid;
     position: relative;
     color: white;
-    /*font-size: 40px;*/
-    font-family: 'Nunito Sans', sans-serif;
+    
 }
-/*.mainPic img{
-    max-height: 700px;
-    max-width: 700px;
-    /*object-fit: cover;*/
-/*}*/
+
 nav{
     height: 6rem;
-    /*border:  1px solid;*/
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
 }
 nav img{
-    /*max-height: 200px;
-    max-width: 200px;*/
-    /*border:  1px solid;*/
-    
     margin-bottom: 4px;
     margin-top: 6px;    
 }
@@ -60,31 +65,95 @@ nav img{
     word-wrap: break-word;
     line-height: 100%;
 }
-form{
-    background-color: rgb(17, 18, 26);
-    color:white;
-    height: 300px;
+.leftSideInfo{
+    margin-top:50px;
+    margin-left: 50px;
 }
+/*learnMore is left hand button*/
+.learnMore{
+    margin-top:50px;
+    width: 150px;
+}
+form{
+    background-color: rgb(42, 42, 51);
+    color:white;
+    height: 400px;
+}
+form input{
+    width: 100%;
+    height: 7%;
+    border-radius: 0%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+form button{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 140px;
+}
+.formInfo{
+    position: absolute;
+    top: 650px;
+    margin-bottom: 75px;
+}
+
 .apiInfo{
     background-color: rgb(216, 213, 213);
     height: 300px;
     margin-top: 50px;
 }
-
-.formInfo{
-    margin-bottom: 75px;
+.art img{
+    max-height: 200px;
+    max-width: 200px;
+    margin-top: 20px;
 }
+.adjustHorse{
+    margin-left: 30px;
+}
+
+.selector{
+margin-top: 450px;
+font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+
 .listedInfo{
     background-color: rgb(216, 213, 213);
     height: 200px;
     
 }
+
 footer{
     height: 200px;
 }
 footer img{
     max-height: 75px;
     max-width: 75px;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 75px;
+}
+
+a{
+    color: rgb(175, 173, 173);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+.infoFooter{
+padding-bottom: 25px;
+text-align: center;
+margin-top: 100px;
+margin-bottom: 50px;
+/*border: springgreen solid;*/
+}
+.bottomBorder{
+border-bottom: rgb(206, 206, 206) solid 1px;
+width: 70%;
 }
