@@ -1,0 +1,90 @@
+/*.mainDiv{
+    /*display: flex;
+    justify-content: center;
+}*/
+h3{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+
+}
+.blackGutterOne{
+    background-color: black;
+    /*position: sticky;*/
+    height: 2000px;
+    position: fixed;
+    width: 50px;
+    left: 0;
+}
+.blackGutterTwo{
+    background-color: black;
+    /*position: sticky;*/
+    height: 2000px;
+    position: fixed;
+    width: 50px;
+    right: 0;
+}
+
+.textAlign{
+    margin-bottom: 6px;
+    margin-left: 10px;
+}
+.mainPic{
+    border:  1px solid;
+    position: relative;
+    color: white;
+    /*font-size: 40px;*/
+    font-family: 'Nunito Sans', sans-serif;
+}
+/*.mainPic img{
+    max-height: 700px;
+    max-width: 700px;
+    /*object-fit: cover;*/
+/*}*/
+nav{
+    height: 6rem;
+    /*border:  1px solid;*/
+}
+nav img{
+    /*max-height: 200px;
+    max-width: 200px;*/
+    /*border:  1px solid;*/
+    
+    margin-bottom: 4px;
+    margin-top: 6px;    
+}
+.bottom-left {
+    position: absolute;
+    bottom: 45px;
+    left: 30px;
+    width: 300px;
+    word-wrap: break-word;
+    line-height: 100%;
+}
+form{
+    background-color: rgb(17, 18, 26);
+    color:white;
+    height: 300px;
+}
+.apiInfo{
+    background-color: rgb(216, 213, 213);
+    height: 300px;
+    margin-top: 50px;
+}
+
+.formInfo{
+    margin-bottom: 75px;
+}
+.listedInfo{
+    background-color: rgb(216, 213, 213);
+    height: 200px;
+    
+}
+footer{
+    height: 200px;
+}
+footer img{
+    max-height: 75px;
+    max-width: 75px;
+    margin-top: 100px;
+    margin-left: 75px;
+}
