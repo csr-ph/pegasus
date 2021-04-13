@@ -130,9 +130,9 @@ form button{
 }
 .apiInfo{
     background-color: rgb(216, 213, 213);
-    height: 300px;
+    height: 325px;
     margin-top: 70px;
-    width: 1000px;
+    width: 1200px;
 }
 .inline{
     display: inline-block;
@@ -143,7 +143,19 @@ form button{
     margin-left: 50px;
     margin-right: 50px;
     margin-top: 30px;
+    /*border:greenyellow solid;*/
 }
+.artApple{
+    max-width: 325px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+.artApple h4{
+    margin: auto;}
+    .adjustHorse{
+        margin-left: 30px;
+    }
 .art h4{
 margin: auto;}
 .adjustHorse{
@@ -156,18 +168,43 @@ margin: auto;}
     font-size: 15px;
     font-weight: 300;
     margin-top: 30px;
+    
 }
-
-
+a h3{
+    color: rgb(216, 213, 213);
+}
+.is-active a h3{
+    color:rgb(0, 0, 0);
+}
 .listedInfo{
     background-color: rgb(216, 213, 213);
     /*height: 200px;*/
     margin-top: 40px;
     height: 500px;
     width: 500px;
-    
+    overflow: scroll;
+    overflow-x: hidden;
     
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 footer{
     height: 200px;
@@ -176,7 +213,7 @@ footer img{
     max-height: 75px;
     max-width: 75px;
     margin-top: 50px;
-    margin-left: 75px;
+    margin-left: 100px;
 }
 
 a{

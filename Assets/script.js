@@ -38,8 +38,8 @@ var myVar = setInterval(function(){
             else if(number===3){number === number ++;
                 hotels.textContent = 'Finding hotels.....';}
                 else if(number===4){
-                    hotels.textContent = 'Found hotels in your area';
-                    hotels.removeAttribute("class","has-text-centered");
+                    hotels.textContent = 'Found hotels in your area.';
+                    /*hotels.removeAttribute("class","has-text-centered");*/
                     clearInterval(myVar);    
                 };
     
@@ -225,6 +225,9 @@ for(var i = 0; i < data.data.length; i++){
 inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
 hotelName = data.data[i].hotel.name;
+hotelName = hotelName.toUpperCase();
+var hotelPhone = hotelName = data.data[i].hotel.contact.phone;
+console.log(hotelPhone);
 if(i==0){
 
 hotelsArrayLat[0] = inputLat;
