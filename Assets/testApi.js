@@ -40,8 +40,8 @@ return resp.json();
 // Log the pet data
 /*console.log('hotels', data);*/
 
-/*console.log('hotels', data);*/
-console.log(data.data[0].hotel.latitude);
+console.log('hotels', data.data[0].hotel);
+/*console.log(data.data[0].hotel.latitude);*/
 
 }).catch(function (err) {
 

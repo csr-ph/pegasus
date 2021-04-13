@@ -1,7 +1,11 @@
+/*********hotel items*************** */
 var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
-var secret = "2eaQeSGY6hS7hpd6";     
+var secret = "2eaQeSGY6hS7hpd6"; 
+var inputLat = 100;
+var inputLng = 100;    
 hotelsArrayLat = [100];
 hotelsArrayLng = [100];
+hotelNameArray = [];
 /********************/
 begin = false;
 var factor = 0;
@@ -19,11 +23,10 @@ var checkHotels = document.getElementById("hotels");
 var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
-var inputLat = 100;
-var inputLng = 100;
+
 /************************************/
 function animate(){
-setInterval(function(){
+var myVar = setInterval(function(){
     
     var hotels = document.getElementById("hotelId");
     if(number===0){number === number ++;
@@ -36,7 +39,8 @@ setInterval(function(){
                 hotels.textContent = 'Finding hotels.....';}
                 else if(number===4){
                     hotels.textContent = 'Found hotels in your area';
-                    clearInterval();    
+                    hotels.removeAttribute("class","has-text-centered");
+                    clearInterval(myVar);    
                 };
     
     console.log(number)
@@ -220,27 +224,40 @@ console.log('hotels', data);
 for(var i = 0; i < data.data.length; i++){
 inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
+hotelName = data.data[i].hotel.name;
 if(i==0){
-    
+
 hotelsArrayLat[0] = inputLat;
 hotelsArrayLng[0] = inputLng;
-console.log(hotelsArrayLat, hotelsArrayLng);
+/*console.log(hotelsArrayLat, hotelsArrayLng);*/
+
+hotelNameArray[0]= hotelName;
 begin = true;
 initMap();
 
 }
 else{
-    console.log(hotelsArrayLng);
-    console.log(hotelsArrayLng);
+hotelNameArray.push(hotelName);
+/*console.log(hotelsArrayLng);*/
+/*console.log(hotelsArrayLng);*/
 hotelsArrayLat.push(inputLat);
 hotelsArrayLng.push(inputLng);
-console.log(inputLng);
-console.log(inputLat);
+/*console.log(inputLng);
+console.log(inputLat);*/
+/*console.log(hotelNameArray);*/
 factor ++;
 MakeMarker();
 /*center();*/
 }
 
+
+}
+/******************adding hotel names**********************************/
+for(var i = 0; i < hotelNameArray.length; i++){
+var ListOfHotels = document.createElement("h2");
+ListOfHotels.setAttribute("class", "textEdit")
+ListOfHotels.textContent = hotelNameArray[i];
+divInfo.append(ListOfHotels);
 }
 }).catch(function (err) {
 

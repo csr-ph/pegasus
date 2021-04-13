@@ -73,7 +73,7 @@ nav img{
 }
 /*learnMore is left hand button*/
 .learnMore{
-    margin-top:50px;
+    margin-top:95px;
     width: 150px;
 }
 form{
@@ -110,9 +110,23 @@ form button{
 }
 #hotelId{
     margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    
+    
 }
 .enterinfoAbove{
     margin-top: 15px;
+    
+}
+.textEdit{
+    padding-top: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    border-top: white solid 1px;
+    width:90%
+
 }
 .apiInfo{
     background-color: rgb(216, 213, 213);
