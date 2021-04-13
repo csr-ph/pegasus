@@ -92,7 +92,7 @@
                 <!--<label for="food">What Are You Craving</label><br>-->
                 <input type="text" id="food" name="food" placeholder=" What Are You Craving"><br>
 
-                <button class="button is-black" type="submit">Show me my trip</button>
+                <button class="button is-black" type="click" id = "submit">Show me my trip</button>
             </form>
         </div>
     </div>
@@ -128,21 +128,32 @@
       </div>
     <!------------------------------------------------------->
                 <div class = "container">
-                    <div class = "columns is-centered">
-                        <div class = "column is-6" id = "holder">
+                    <div>
+                        <div class = "columns is-centered" id = "holder">
+                            <div id = "map"></div>
                             <div class="is-active-element listedInfo">
-                                finding rides
+                                <p>finding rides</p>
                             </div>
                         </div>
                        
                     </div>
                 </div>
     <!------------------------------------------------------->
-    <div class = "container">
-        <div class="columns is-centered">
-            <div class="apiInfo column is-8 art">
-                <img src="./Assets/horse.png" alt="horse">
-                <h4 class = "adjustHorse">Choose the right ride tailored to your specs.</h4>
+    <div class = "container apiInfo">
+        <div class=" columns is-centered ">
+            <div class>
+                <div class="column art inline">
+                    <img src="./Assets/horse.png" alt="horse">
+                    <h4>Choose the right ride tailored to your specs.</h4>
+                </div>
+                <div class="column art inline">
+                    <img src="./Assets/horse.png">
+                    <h4 >Find accomodation to stay while you travel.</h4>
+                </div>
+                <div class="column art inline">
+                    <img src="./Assets/horse.png">
+                    <h4 >Find food on the go to keep you fueled.</h4>
+                </div>
             </div>
         </div>
     </div>
@@ -168,6 +179,9 @@
         </div>
         <img src="./Assets/pegasus logo.png" alt="logo">
     </footer>
+    
     <script src="./Assets/script.js"></script>
+    <!--<script src="./Assets/testApi.js"></script>-->
+    <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA&callback=initMap"></script>
 </body>
 </html>

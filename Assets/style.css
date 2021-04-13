@@ -25,15 +25,16 @@ h4{
     background-color: black;
     height: 2000px;
     position: fixed;
-    width: 50px;
+    width: 70px;
     left: 0;
 }
 .blackGutterTwo{
     background-color: black;
     height: 2000px;
     position: fixed;
-    width: 50px;
+    width: 70px;
     right: 0;
+    
 }
 
 .textAlign{
@@ -52,6 +53,7 @@ nav{
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 300;
+    
 }
 nav img{
     margin-bottom: 4px;
@@ -97,36 +99,54 @@ form button{
     margin-top: 140px;
 }
 .formInfo{
-    position: absolute;
-    top: 650px;
+    /*position: absolute;
+    top: 750px;
     margin-bottom: 75px;
+    margin-left: 110px;
+    */
+    bottom: 40px;
+    margin-right: 50px;
+
 }
 
 .apiInfo{
     background-color: rgb(216, 213, 213);
     height: 300px;
-    margin-top: 50px;
+    margin-top: 70px;
+    width: 1000px;
+}
+.inline{
+    display: inline-block;
 }
 .art img{
-    max-height: 200px;
+    max-height: 600px;
     max-width: 200px;
-    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
 }
+.art h4{
+margin: auto;}
 .adjustHorse{
     margin-left: 30px;
 }
 
 .selector{
-margin-top: 450px;
-font-family: 'Nunito Sans', sans-serif;
+    /*margin-top: 450px;*/
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 300;
+    margin-top: 30px;
 }
 
 
 .listedInfo{
     background-color: rgb(216, 213, 213);
-    height: 200px;
+    /*height: 200px;*/
+    margin-top: 40px;
+    height: 500px;
+    width: 500px;
+    
     
 }
 
@@ -157,3 +177,17 @@ margin-bottom: 50px;
 border-bottom: rgb(206, 206, 206) solid 1px;
 width: 70%;
 }
+#map{
+    height: 500px;
+    width: 1200px;
+    /*margin:auto;*/
+    background-color: chartreuse;
+    margin-top: 40px;
+    border-right: black solid;
+
+}
+/*html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }*/
