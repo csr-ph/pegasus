@@ -108,7 +108,12 @@ form button{
     margin-right: 50px;
 
 }
-
+#hotelId{
+    margin-top: 15px;
+}
+.enterinfoAbove{
+    margin-top: 15px;
+}
 .apiInfo{
     background-color: rgb(216, 213, 213);
     height: 300px;
@@ -181,9 +186,9 @@ width: 70%;
     height: 500px;
     width: 1200px;
     /*margin:auto;*/
-    background-color: chartreuse;
+    background-color: rgb(42, 42, 51);
     margin-top: 40px;
-    border-right: black solid;
+    /*border-right: black solid;*/
 
 }
 /*html, body {

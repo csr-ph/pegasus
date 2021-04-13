@@ -27,15 +27,16 @@ setInterval(function(){
     
     var hotels = document.getElementById("hotelId");
     if(number===0){number === number ++;
-    hotels.textContent = 'finding hotels.';}
+    hotels.textContent = 'Finding hotels.';}
     else if (number===1){number === number ++;
-        hotels.textContent = 'finding hotels..';}
+        hotels.textContent = 'Finding hotels..';}
     else if(number===2){number === number ++;
-            hotels.textContent = 'finding hotels...';}
+            hotels.textContent = 'Finding hotels...';}
             else if(number===3){number === number ++;
-                hotels.textContent = 'finding hotels.....';}
-                else if(number===4){number = 0;
-                    
+                hotels.textContent = 'Finding hotels.....';}
+                else if(number===4){
+                    hotels.textContent = 'Found hotels in your area';
+                    clearInterval();    
                 };
     
     console.log(number)
@@ -69,6 +70,7 @@ function initMap() {
       position: focalPoint,
       map: map,
     });
+    
 }
 function center(){ 
     console.log(map);
@@ -155,7 +157,7 @@ function center(){
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
         
-        divInfo.innerHTML= "<p id = 'hotelId'>finding hotels</p>";
+        divInfo.innerHTML= "<h3 class='has-text-centered' id = 'hotelId'>Finding hotels</h3>";
         /*divInfo.innerHTML= cityValue.value;*/
         runHotels(divInfo);
 
@@ -198,7 +200,7 @@ console.log('token', data);
 
 // Return a second API call
 // This one uses the token we received for authentication
-return fetch("https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=" + city + "&roomQuantity=1&adults=2&radius=1&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE", {
+return fetch("https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=" + city + "&roomQuantity=1&adults=2&radius=100&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE", {
   headers: {
     'Authorization': data.token_type + ' ' + data.access_token,
     'Content-Type': 'application/x-www-form-urlencoded'
