@@ -92,6 +92,17 @@ form input{
     font-size: 15px;
     font-weight: 300;
 }
+select{
+    width: 100%;
+    height: 7%;
+    border-radius: 0%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
 form button{
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
@@ -119,10 +130,14 @@ form button{
     margin-top: 15px;
     
 }
+.textEditP{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
 .textEdit{
     padding-top: 5px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     margin-left: 20px;
     border-top: white solid 1px;
     width:90%

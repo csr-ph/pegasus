@@ -1,4 +1,10 @@
-/*********hotel items*************** */
+/*********Ride items*****************/
+var latForRides;
+var longForRides;
+var rideLat = [];
+var rideLong = [];
+beginRides = false;
+/*********hotel items****************/
 var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
 var secret = "2eaQeSGY6hS7hpd6"; 
 var inputLat = 100;
@@ -6,6 +12,7 @@ var inputLng = 100;
 hotelsArrayLat = [100];
 hotelsArrayLng = [100];
 hotelNameArray = [];
+phoneNumbers = [];
 /********************/
 begin = false;
 var factor = 0;
@@ -50,7 +57,7 @@ var myVar = setInterval(function(){
 
 let map;
 
-function initMap() {
+function initMapH() {
     if(begin){
         inputLat = parseFloat(hotelsArrayLat[factor]);
             inputLng = parseFloat(hotelsArrayLng[factor]);
@@ -59,20 +66,34 @@ function initMap() {
     zoom: 13,
     });}
 }
+/**********************************/
+function initMapR() {
+    if(beginRides){
+        rideLat = parseFloat(latForRides[0]);
+        rideLong = parseFloat(longForRides[0]);
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: rideLat, lng: rideLong },
+    zoom: 13,
+    });}
+}
 
     function MakeMarker(){
-     
+     console.log(factor);
             inputLat = parseFloat(hotelsArrayLat[factor]);
             inputLng = parseFloat(hotelsArrayLng[factor]);
-    console.log(factor);
+    /*console.log(factor);*/
     // The location of focalPoint
     const focalPoint = {lat: inputLat, lng: inputLng};
     // The map, centered at focalPoint
-    
+    var number = factor + 1;
     const marker = new google.maps.Marker({
-         icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ddd',
-      position: focalPoint,
-      map: map,
+        /*icon: "http://maps.google.com/mapfiles/kml/paddle/wht-blank.png",*/
+        label: {color: '#000', fontSize: '12px', fontWeight: '600',
+        /*text: hotelNameArray[factor] + number.toString()},*/
+        text: number.toString()},
+        position: focalPoint,
+        map: map,
     });
     
 }
@@ -109,6 +130,8 @@ function center(){
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
         divInfo.innerHTML= "finding rides";
+        FindBikes();
+
     });
     
     /******************************/
@@ -226,8 +249,22 @@ inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
 hotelName = data.data[i].hotel.name;
 hotelName = hotelName.toUpperCase();
-var hotelPhone = hotelName = data.data[i].hotel.contact.phone;
+
+if(hotelName!="TEST CONTENT"){
+    var hotelPhone;
+    if(data.data[i].hotel.contact === null){
+        hotelPhone = "Phone number not listed."
+        phoneNumbers.push(hotelPhone);
+    }
+    else if(data.data[i].hotel.contact != null){
+hotelPhone = data.data[i].hotel.contact.phone;
 console.log(hotelPhone);
+phoneNumbers.push(hotelPhone);
+}
+else{
+    hotelPhone = "Phone number not listed."
+}
+}
 if(i==0){
 
 hotelsArrayLat[0] = inputLat;
@@ -236,15 +273,17 @@ hotelsArrayLng[0] = inputLng;
 
 hotelNameArray[0]= hotelName;
 begin = true;
-initMap();
+initMapH();
 
 }
-else{
+else{ 
+if(hotelName!="TEST CONTENT"){
 hotelNameArray.push(hotelName);
 /*console.log(hotelsArrayLng);*/
 /*console.log(hotelsArrayLng);*/
 hotelsArrayLat.push(inputLat);
 hotelsArrayLng.push(inputLng);
+/*phoneNumbers.push(hotelPhone);*/
 /*console.log(inputLng);
 console.log(inputLat);*/
 /*console.log(hotelNameArray);*/
@@ -252,15 +291,23 @@ factor ++;
 MakeMarker();
 /*center();*/
 }
+}
 
 
 }
 /******************adding hotel names**********************************/
+console.log(hotelNameArray);
+console.log(phoneNumbers);
 for(var i = 0; i < hotelNameArray.length; i++){
 var ListOfHotels = document.createElement("h2");
-ListOfHotels.setAttribute("class", "textEdit")
-ListOfHotels.textContent = hotelNameArray[i];
+var phoneNum = document.createElement("p");
+phoneNum.setAttribute("class", "textEditP")
+useAbleNum = i + 1;
+ListOfHotels.setAttribute("class", "textEdit");
+ListOfHotels.textContent = useAbleNum + ". " + hotelNameArray[i];
+phoneNum.textContent = phoneNumbers[i];
 divInfo.append(ListOfHotels);
+divInfo.append(phoneNum);
 }
 }).catch(function (err) {
 
@@ -270,7 +317,33 @@ console.log('something went wrong', err);
 });
 
 };
-
-
+/*************************Api for bikes******************************/
+function FindBikes(){
+    fetch("http://api.citybik.es/v2/networks")
+    .then(function(response){
+    return response.json();
+    }).then( function(data){
+        for(var i = 0; i < data.networks.length; i ++)
+        {
+        if(data.networks[i].location.city = "Los Angeles")
+        {
+            if(data.networks[i].location.country = "US"){
+            /*console.log(data.networks[i].location.city);*/
+            var foundBikes = data.networks[i];
+            /*console.log("found");
+            console.log(foundBikes);*/
+            latForRides = data.networks[i].location.latitude
+            longForRides = data.networks[i].location.longitude;
+            rideLat.push(latForRides);
+            rideLong.push(longForRides);
+            }
+        }
+    }
+    console.log(rideLong,rideLat);
+    beginRides = true;
+    initMapR();
+    }
+    )
+}
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
