@@ -1,3 +1,5 @@
+var markers = [];
+setupFirst = true;
 beginProcess = false;
 var usableTerm;
 var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN"];
@@ -43,29 +45,32 @@ var active = document.getElementById("holder");
 
 /************************************/
 function animate(){
+/********************************rides*/
     if(rides){
         rides = false;
 var myVar = setInterval(function(){
     
-    var hotels = document.getElementById("bikeId");
-    /*hotels.setAttribute("class", "enterInfoAbove has-text-centered");*/
+    var bikes = document.getElementById("bikeId");
+    /*bikes.setAttribute("class", "enterInfoAbove has-text-centered");*/
     if(number===0){number === number ++;
-    hotels.textContent = 'Finding bikes.';}
+    bikes.textContent = 'Finding bikes.';}
     else if (number===1){number === number ++;
-        hotels.textContent = 'Finding bikes..';}
+        bikes.textContent = 'Finding bikes..';}
     else if(number===2){number === number ++;
-            hotels.textContent = 'Finding bikes...';}
+            bikes.textContent = 'Finding bikes...';}
             else if(number===3){number === number ++;
-                hotels.textContent = 'Finding bikes.....';}
+                bikes.textContent = 'Finding bikes.....';}
                 else if(number===4){
-                    hotels.textContent = 'Found bikes in your area.';
-                    /*hotels.removeAttribute("class","has-text-centered");*/
-                    clearInterval(myVar);    
+                    bikes.textContent = 'Found bikes in your area.';
+                    /*bikes.removeAttribute("class","has-text-centered");*/
+                    clearInterval(myVar); 
+                    number = 0;  
+   
                 };
     
     console.log(number)
     },1000);
-   
+/*******************************hotels */
 }else if(hotels){
         hotels = false;
         var myVar = setInterval(function(){
@@ -82,30 +87,33 @@ var myVar = setInterval(function(){
                         else if(number===4){
                             hotels.textContent = 'Found hotels in your area.';
                             /*hotels.removeAttribute("class","has-text-centered");*/
-                            clearInterval(myVar);    
+                            clearInterval(myVar);   
+                            number = 0;  
+ 
                         };
             
             console.log(number)
             },1000);
            
-
-}
-else if(food){
+/*************************food*/
+}else if(food){
+    food = false;
     var myVar = setInterval(function(){
             
-        var hotels = document.getElementById("foodId");
+        var foods = document.getElementById("foodId");
         if(number===0){number === number ++;
-        hotels.textContent = 'Finding food.';}
+        foods.textContent = 'Finding food.';}
         else if (number===1){number === number ++;
-            hotels.textContent = 'Finding food..';}
+            foods.textContent = 'Finding food..';}
         else if(number===2){number === number ++;
-                hotels.textContent = 'Finding food...';}
+                foods.textContent = 'Finding food...';}
                 else if(number===3){number === number ++;
-                    hotels.textContent = 'Finding food.....';}
+                    foods.textContent = 'Finding food.....';}
                     else if(number===4){
-                        hotels.textContent = 'Found food in your area.';
-                        /*hotels.removeAttribute("class","has-text-centered");*/
-                        clearInterval(myVar);    
+                        foods.textContent = 'Found food in your area.';
+                        /*foods.removeAttribute("class","has-text-centered");*/
+                        clearInterval(myVar);
+                        number = 0;  
                     };
         
         console.log(number)
@@ -114,9 +122,10 @@ else if(food){
 
 }
 /**********************************/
-let map;
 
+let map;
 function initMapH() {
+   
     if(begin){
         inputLat = parseFloat(hotelsArrayLat[factor]);
         inputLng = parseFloat(hotelsArrayLng[factor]);
@@ -128,6 +137,7 @@ function initMapH() {
 }
 /**********************************/
 function initMapR() {
+  
     if(beginRides){
         latForRides = parseFloat(rideLatArray[rideFactor]);
         longForRides = parseFloat(rideLongArray[rideFactor]);
@@ -158,11 +168,11 @@ function MakeMarkerRides(){
         position: focalPoint,
         map: map,
    });
-   
+        markers.push(marker);
 }
 /****************************************************/    
     function MakeMarkerHotels(){
-            
+                   
         inputLat = parseFloat(hotelsArrayLat[factor]);
         inputLng = parseFloat(hotelsArrayLng[factor]);
         /*console.log(factor);*/
@@ -178,17 +188,39 @@ function MakeMarkerRides(){
         text: number.toString()},
         position: focalPoint,
         map: map,
+        
     });
-    
+        markers.push(marker);
 }
-function center(){ 
+/*function setMapOnAll(map) {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+  
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
+  
+  // Shows any markers currently in the array.
+  function showMarkers() {
+    setMapOnAll(map);
+  }
+  
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+  }*/
+/*function center(){ 
     console.log(map);
     map,{
     center: new google.maps.LatLng(inputLat,inputLng),
 
 
 };
-}    
+}*/    
 
 
 /************************************/
@@ -215,10 +247,11 @@ function center(){
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
         if(beginProcess){
-        divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding Bikes</h3>";
+        divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding bikes</h3>";
         FindBikes(divInfo);
         rides=true;
         animate();
+        markers = [];
     }
     else{
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -253,6 +286,7 @@ function center(){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
         food=true;
         animate();
+        markers = [];
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -287,6 +321,8 @@ function center(){
         runHotels(divInfo);
         hotels = true;
         animate();
+        markers = [];
+
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -507,10 +543,43 @@ submitButton.addEventListener("click", function(event){
     event.preventDefault();
     console.log("foundButton");
     console.log(cityValue.value);
+    
     if(cityValue.value === null||cityValue.value === ""){
     console.log("no value")}
     else{
-        beginProcess = true;
+        if(setupFirst){
+            
+            var activeElement = document.querySelector(".is-active-element");
+            if(activeElement){
+                activeElement.remove();
+            console.log(activeElement);
+            }else{
+                console.log("not found activeElement");
+            }
+            if(checkFood.hasAttribute("class","is-active")||checkHotels.hasAttribute("class","is-active")){
+            checkFood.removeAttribute("class","is-active");
+            checkHotels.removeAttribute("class","is-active");
+            console.log("found");
+            }
+            else{
+                console.log("not found");
+            }
+                checkRides.setAttribute("class","is-active");
+        
+                    var divInfo = document.createElement("div");
+                    divInfo.setAttribute("class","is-active-element listedInfo");
+                    active.append(divInfo);
+                    console.log("here");
+                    divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding bikes</h3>";
+                    FindBikes(divInfo);
+                    rides=true;
+                    animate();
+                    beginProcess = true;
+                    setupFirst = false
+            }
+            else{
+            beginProcess = true;
+        }
     }
   });
 
