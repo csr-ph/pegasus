@@ -4,8 +4,8 @@ animating = false;
 setupFirst = true;
 beginProcess = false;
 var usableTerm;
-var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN"];
-var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO"];
+var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS"];
+var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
 /*********Ride items*****************/
 var latForRides = 100;
 var longForRides = 100;
@@ -527,7 +527,7 @@ function FindBikes(divInfo){
                         longForRides = data.network.stations[i].longitude;
                         /*freeInfo.push(freeBikeInfo);*/
                         /*bikeAddress = data.network.stations[i].extra.address;*/
-                        console.log(data.network.stations.length);
+                        /*console.log(data.network.stations.length);*/
                         
                         /*var bikeInfoForFreeBikes = document.createElement("p");
                         bikeInfoForFreeBikes.setAttribute("class", "textEditP");
