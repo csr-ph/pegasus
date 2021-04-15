@@ -1,9 +1,16 @@
+beginProcess = false;
+var usableTerm;
+var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN"];
+var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO"];
 /*********Ride items*****************/
-var latForRides;
-var longForRides;
-var rideLat = [];
-var rideLong = [];
+var latForRides = 100;
+var longForRides = 100;
+var rideLatArray = [];
+var rideLongArray = [];
 beginRides = false;
+var rideFactor = 0;
+rides = false;
+bikeInfoArray = [];
 /*********hotel items****************/
 var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
 var secret = "2eaQeSGY6hS7hpd6"; 
@@ -13,6 +20,9 @@ hotelsArrayLat = [100];
 hotelsArrayLng = [100];
 hotelNameArray = [];
 phoneNumbers = [];
+hotels= false;
+/********************/
+food = false;
 /********************/
 begin = false;
 var factor = 0;
@@ -33,19 +43,22 @@ var active = document.getElementById("holder");
 
 /************************************/
 function animate(){
+    if(rides){
+        rides = false;
 var myVar = setInterval(function(){
     
-    var hotels = document.getElementById("hotelId");
+    var hotels = document.getElementById("bikeId");
+    /*hotels.setAttribute("class", "enterInfoAbove has-text-centered");*/
     if(number===0){number === number ++;
-    hotels.textContent = 'Finding hotels.';}
+    hotels.textContent = 'Finding bikes.';}
     else if (number===1){number === number ++;
-        hotels.textContent = 'Finding hotels..';}
+        hotels.textContent = 'Finding bikes..';}
     else if(number===2){number === number ++;
-            hotels.textContent = 'Finding hotels...';}
+            hotels.textContent = 'Finding bikes...';}
             else if(number===3){number === number ++;
-                hotels.textContent = 'Finding hotels.....';}
+                hotels.textContent = 'Finding bikes.....';}
                 else if(number===4){
-                    hotels.textContent = 'Found hotels in your area.';
+                    hotels.textContent = 'Found bikes in your area.';
                     /*hotels.removeAttribute("class","has-text-centered");*/
                     clearInterval(myVar);    
                 };
@@ -53,42 +66,113 @@ var myVar = setInterval(function(){
     console.log(number)
     },1000);
    
+}else if(hotels){
+        hotels = false;
+        var myVar = setInterval(function(){
+            
+            var hotels = document.getElementById("hotelId");
+            if(number===0){number === number ++;
+            hotels.textContent = 'Finding hotels.';}
+            else if (number===1){number === number ++;
+                hotels.textContent = 'Finding hotels..';}
+            else if(number===2){number === number ++;
+                    hotels.textContent = 'Finding hotels...';}
+                    else if(number===3){number === number ++;
+                        hotels.textContent = 'Finding hotels.....';}
+                        else if(number===4){
+                            hotels.textContent = 'Found hotels in your area.';
+                            /*hotels.removeAttribute("class","has-text-centered");*/
+                            clearInterval(myVar);    
+                        };
+            
+            console.log(number)
+            },1000);
+           
+
+}
+else if(food){
+    var myVar = setInterval(function(){
+            
+        var hotels = document.getElementById("foodId");
+        if(number===0){number === number ++;
+        hotels.textContent = 'Finding food.';}
+        else if (number===1){number === number ++;
+            hotels.textContent = 'Finding food..';}
+        else if(number===2){number === number ++;
+                hotels.textContent = 'Finding food...';}
+                else if(number===3){number === number ++;
+                    hotels.textContent = 'Finding food.....';}
+                    else if(number===4){
+                        hotels.textContent = 'Found food in your area.';
+                        /*hotels.removeAttribute("class","has-text-centered");*/
+                        clearInterval(myVar);    
+                    };
+        
+        console.log(number)
+        },1000);
 }
 
+}
+/**********************************/
 let map;
 
 function initMapH() {
     if(begin){
         inputLat = parseFloat(hotelsArrayLat[factor]);
-            inputLng = parseFloat(hotelsArrayLng[factor]);
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: inputLat, lng: inputLng },
-    zoom: 13,
+        inputLng = parseFloat(hotelsArrayLng[factor]);
+        console.log(typeof inputLat);
+        map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: inputLat, lng: inputLng },
+        zoom: 13,
     });}
 }
 /**********************************/
 function initMapR() {
     if(beginRides){
-        rideLat = parseFloat(latForRides[0]);
-        rideLong = parseFloat(longForRides[0]);
-
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: rideLat, lng: rideLong },
-    zoom: 13,
+        latForRides = parseFloat(rideLatArray[rideFactor]);
+        longForRides = parseFloat(rideLongArray[rideFactor]);
+        /*console.log(typeof latForRides);
+        console.log(latForRides);*/
+        map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: latForRides, lng: longForRides},
+        zoom: 15,
     });}
 }
-
-    function MakeMarker(){
-     console.log(factor);
-            inputLat = parseFloat(hotelsArrayLat[factor]);
-            inputLng = parseFloat(hotelsArrayLng[factor]);
-    /*console.log(factor);*/
-    // The location of focalPoint
-    const focalPoint = {lat: inputLat, lng: inputLng};
-    // The map, centered at focalPoint
-    var number = factor + 1;
-    const marker = new google.maps.Marker({
-        /*icon: "http://maps.google.com/mapfiles/kml/paddle/wht-blank.png",*/
+/******************************************************* */
+function MakeMarkerRides(){
+        /*console.log(factor);*/
+        latForRides = parseFloat(rideLatArray[rideFactor]);
+        longForRides = parseFloat(rideLongArray[rideFactor]);
+        /*console.log(factor);*/
+        // The location of focalPoint
+        const focalPoint = {lat: latForRides, lng: longForRides};
+        // The map, centered at focalPoint
+        var number = rideFactor;
+        const marker = new google.maps.Marker({
+        icon: "http://maps.google.com/mapfiles/kml/shapes/cycling.png",
+        /*icon: "http://maps.google.com/mapfiles/kml/paddle/blu-blank-lv.png",*/
+        /*icon: "http://maps.google.com/mapfiles/kml/paddle/blu-blank.png",*/
+        label: {color: 'white', fontSize: '12px', fontWeight: '600',
+        /*text: hotelNameArray[factor] + number.toString()},*/
+        text: number.toString()},
+        position: focalPoint,
+        map: map,
+   });
+   
+}
+/****************************************************/    
+    function MakeMarkerHotels(){
+            
+        inputLat = parseFloat(hotelsArrayLat[factor]);
+        inputLng = parseFloat(hotelsArrayLng[factor]);
+        /*console.log(factor);*/
+        // The location of focalPoint
+        const focalPoint = {lat: inputLat, lng: inputLng};
+        // The map, centered at focalPoint
+        var number = factor + 1;
+        const marker = new google.maps.Marker({
+        icon:"http://maps.google.com/mapfiles/kml/shapes/lodging.png",
+        /*icon:"http://maps.google.com/mapfiles/kml/paddle/wht-blank.png",*/
         label: {color: '#000', fontSize: '12px', fontWeight: '600',
         /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
@@ -109,7 +193,8 @@ function center(){
 
 /************************************/
 
-    checkRides.addEventListener("click", function(){
+    checkRides.addEventListener("click", function()
+    {
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -129,16 +214,20 @@ function center(){
         var divInfo = document.createElement("div");
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
-        divInfo.innerHTML= "finding rides";
-        FindBikes();
-
+        if(beginProcess){
+        divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding Bikes</h3>";
+        FindBikes(divInfo);
+        rides=true;
+        animate();
+    }   
     });
     
     /******************************/
  
     
     checkFood.addEventListener("click", function(){
-    var activeElement = document.querySelector(".is-active-element");
+
+        var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
     console.log(activeElement);
@@ -155,14 +244,18 @@ function center(){
         checkFood.setAttribute("class","is-active");
 
         var divInfo = document.createElement("div");
-        divInfo.setAttribute("id", "hotelId");
+        
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
-        divInfo.innerHTML= "finding food";
-});
+        if(beginProcess){
+        divInfo.innerHTML= "<h3 class='has-text-centered' id = 'foodId'>finding food</h3>";
+        food=true;
+        animate();
+}});
 
 /*********************************/
     checkHotels.addEventListener("click", function(){
+        
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -183,27 +276,17 @@ function center(){
         var divInfo = document.createElement("div");
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
-        
+        if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered' id = 'hotelId'>Finding hotels</h3>";
         /*divInfo.innerHTML= cityValue.value;*/
         runHotels(divInfo);
-
-animate();
-});
-/************************************************************ */
-submitButton.addEventListener("click", function(event){
-    event.preventDefault();
-    console.log("foundButton");
-    console.log(cityValue.value);
-  });
-
-
-
-
-
+        hotels = true;
+        animate();
+}});
+    
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
-    
+    if(beginProcess){
 var city = cityValue.value;
 
 fetch("https://test.api.amadeus.com/v1/security/oauth2/token",         {
@@ -279,8 +362,8 @@ initMapH();
 else{ 
 if(hotelName!="TEST CONTENT"){
 hotelNameArray.push(hotelName);
-/*console.log(hotelsArrayLng);*/
-/*console.log(hotelsArrayLng);*/
+console.log(hotelsArrayLng);
+console.log(hotelsArrayLng);
 hotelsArrayLat.push(inputLat);
 hotelsArrayLng.push(inputLng);
 /*phoneNumbers.push(hotelPhone);*/
@@ -288,7 +371,7 @@ hotelsArrayLng.push(inputLng);
 console.log(inputLat);*/
 /*console.log(hotelNameArray);*/
 factor ++;
-MakeMarker();
+MakeMarkerHotels();
 /*center();*/
 }
 }
@@ -316,34 +399,107 @@ console.log('something went wrong', err);
 
 });
 
+}
 };
 /*************************Api for bikes******************************/
-function FindBikes(){
-    fetch("http://api.citybik.es/v2/networks")
-    .then(function(response){
-    return response.json();
-    }).then( function(data){
-        for(var i = 0; i < data.networks.length; i ++)
-        {
-        if(data.networks[i].location.city = "Los Angeles")
-        {
-            if(data.networks[i].location.country = "US"){
-            /*console.log(data.networks[i].location.city);*/
-            var foundBikes = data.networks[i];
-            /*console.log("found");
-            console.log(foundBikes);*/
-            latForRides = data.networks[i].location.latitude
-            longForRides = data.networks[i].location.longitude;
-            rideLat.push(latForRides);
-            rideLong.push(longForRides);
-            }
+function FindBikes(divInfo){
+    console.log(cityValue.value);
+    for(var i = 0; i < hardCoded.length; i++){
+        if(hardCoded[i]===cityValue.value){
+            usableTerm = realNames[i];
+            console.log(realNames[i]);
         }
     }
-    console.log(rideLong,rideLat);
-    beginRides = true;
-    initMapR();
-    }
-    )
+    fetch("http://api.citybik.es/v2/networks")
+
+    .then(function(response){
+
+    return response.json();
+
+    }).then(function(data){
+
+        for(var i = 0; i < data.networks.length; i ++)
+        {/*console.log(data.networks[i].location.city);*/
+            /*if(data.networks[i].location.city ==="London"){
+                console.log("found LON");
+            }*/
+            
+        if(data.networks[i].location.city === usableTerm)
+        {
+            console.log(data.networks[i].href);
+            var href = data.networks[i].href;
+            
+            console.log("http://api.citybik.es" + href);
+            fetch("http://api.citybik.es" + href).then(function(response){
+            return response.json();
+            }).then(function(data){
+                for(var i = 0; i < data.network.stations.length; i++){
+                    /*console.log(data.network.stations[0].latitude);*/
+                    /*console.log(data.network.stations[i].latitude);
+                    console.log(data.network.stations[i].longitude); */      
+                    latForRides = data.network.stations[i].latitude;
+                    longForRides = data.network.stations[i].longitude;
+                if(rideLatArray.length === 0 && rideLongArray.length === 0){
+                    rideLatArray[0]=latForRides;
+                    rideLongArray[0]=longForRides;
+                
+                    beginRides = true;
+                    initMapR();
+                    } 
+                    else{rideLatArray.push(latForRides);
+                    rideLongArray.push(longForRides);
+                    rideFactor ++;
+                    MakeMarkerRides();
+                    }
+                }
+                   
+            
+           
+            
+            
+                /*console.log(data.networks[i]);
+                console.log(data.networks[i].name);
+                
+                latForRides = data.networks[i].location.latitude;
+                longForRides = data.networks[i].location.longitude;*/
+                
+                /*if(rideLatArray.length === 0 && rideLongArray.length === 0){
+                rideLatArray[0]=latForRides;
+                rideLongArray[0]=longForRides;
+                
+                beginRides = true;
+                initMapR();
+                }*/
+            
+                /*rideLatArray.push(latForRides);
+                rideLongArray.push(longForRides);
+                rideFactor ++;
+                MakeMarkerRides();*/
+                
+               /* for(var i = 0; i < bikeInfoArray.length; i++){
+                var bikes = document.createElement("h2");*/
+                /*var bikeInfo = document.createElement("p");
+                bikeInfo.setAttribute("class", "textEditP")
+                var useAbleNum = i + 1;*/
+                /*bikes.setAttribute("class", "textEdit");
+                bikes.textContent = useAbleNum + ". " + bikeInfoArray[i];*/
+                /*bikeInfo.textContent = data.networks[i].name;
+                /*divInfo.append(bikes);*/
+                /*divInfo.append(bikeInfo);*/
+             
+                
+            
+               
+    })
 }
+}
+})
+}
+submitButton.addEventListener("click", function(event){
+    event.preventDefault();
+    console.log("foundButton");
+    console.log(cityValue.value);
+    beginProcess = true;
+  });
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
