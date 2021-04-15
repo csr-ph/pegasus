@@ -1,4 +1,6 @@
 var markers = [];
+StopProcess = false;
+animating = false;
 setupFirst = true;
 beginProcess = false;
 var usableTerm;
@@ -43,13 +45,15 @@ var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
 
+
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
 /************************************/
-function animate(){
+function animate(){ 
+  
 /********************************rides*/
     if(rides){
         rides = false;
@@ -68,13 +72,17 @@ var myVar = setInterval(function(){
                 else if(number===4){
                     bikes.textContent = 'Found bikes in your area.';
                     /*bikes.removeAttribute("class","has-text-centered");*/
-                    clearInterval(myVar); 
                     number = 0;  
+                    animating = false;
+                    clearInterval(myVar); 
+                    
    
                 };
     
     console.log(number)
-    },1000);
+    },
+    1000);
+    
 /*******************************hotels */
 }else if(hotels){
         hotels = false;
@@ -92,13 +100,16 @@ var myVar = setInterval(function(){
                         else if(number===4){
                             hotels.textContent = 'Found hotels in your area.';
                             /*hotels.removeAttribute("class","has-text-centered");*/
-                            clearInterval(myVar);   
+                               
                             number = 0;  
- 
+                            animating = false;
+                            clearInterval(myVar);
                         };
             
             console.log(number)
-            },1000);
+            },
+            1000);
+            
            
 /*************************food*/
 }else if(food){
@@ -117,12 +128,16 @@ var myVar = setInterval(function(){
                     else if(number===4){
                         foods.textContent = 'Found food in your area.';
                         /*foods.removeAttribute("class","has-text-centered");*/
-                        clearInterval(myVar);
+                        
                         number = 0;  
+                        animating = false;
+                        clearInterval(myVar);
                     };
         
         console.log(number)
-        },1000);
+        },
+        1000);
+        
 }
 
 }
@@ -175,6 +190,7 @@ function MakeMarkerRides(){
         map: mapR,
    });
         markers.push(marker);
+        
 }
 /****************************************************/    
     function MakeMarkerHotels(){
@@ -197,11 +213,16 @@ function MakeMarkerRides(){
         
     });
         markers.push(marker);
+        
+
 }
 /************************************/
 
     checkRides.addEventListener("click", function()
     {
+        if(StopProcess === false && animating === false){
+        StopProcess = true;
+        animating = true;
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -233,13 +254,15 @@ function MakeMarkerRides(){
     }
     else{
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-    });
+    }});
     
     /******************************/
  
     
     checkFood.addEventListener("click", function(){
-
+        if(StopProcess === false && animating === false){
+        StopProcess = true;
+        animating = true;
         var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -271,11 +294,13 @@ function MakeMarkerRides(){
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-        });
+    }});
 
 /*********************************/
     checkHotels.addEventListener("click", function(){
-        
+        if(StopProcess === false && animating === false){
+        StopProcess = true;   
+        animating = true;
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -309,11 +334,12 @@ function MakeMarkerRides(){
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-    });
+    }});
     
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
     
+
     hotelsArrayLat = [];
     hotelsArrayLng = [];
     hotelNameArray = [];
@@ -410,6 +436,7 @@ factor ++;
 MakeMarkerHotels();
 /*center();*/
 }
+
 }
 
 
@@ -436,10 +463,13 @@ console.log('something went wrong', err);
 });
 
 }
+StopProcess = false;
+
 };
 /*************************Api for bikes******************************/
 function FindBikes(divInfo){
     
+
     hotelsArrayLat = [];
     hotelsArrayLng = [];
     hotelNameArray = [];
@@ -530,6 +560,8 @@ function FindBikes(divInfo){
 }
 }
 })
+StopProcess = false;
+
 }
 submitButton.addEventListener("click", function(event){
     event.preventDefault();
@@ -557,7 +589,8 @@ submitButton.addEventListener("click", function(event){
                 console.log("not found");
             }
                 checkRides.setAttribute("class","is-active");
-        
+                    StopProcess = true;
+                    animating = true;
                     var divInfo = document.createElement("div");
                     divInfo.setAttribute("class","is-active-element listedInfo");
                     active.append(divInfo);
@@ -568,6 +601,8 @@ submitButton.addEventListener("click", function(event){
                     animate();
                     beginProcess = true;
                     setupFirst = false
+                    
+
             }
             else{
             beginProcess = true;
