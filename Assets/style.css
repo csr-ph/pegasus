@@ -190,6 +190,7 @@ a h3{
 .is-active a h3{
     color:rgb(0, 0, 0);
 }
+
 .listedInfo{
     background-color: rgb(216, 213, 213);
     /*height: 200px;*/

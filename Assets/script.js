@@ -285,6 +285,7 @@ function MakeMarkerRides(){
         active.append(divInfo);
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
+        runFood(divInfo);
         food=true;
         markers = [];
         
@@ -335,7 +336,11 @@ function MakeMarkerRides(){
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
     }});
+/***************************API for food******************************/
+function runFood(divInfo){
     
+    StopProcess = false;
+}
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
     
@@ -565,13 +570,14 @@ StopProcess = false;
 }
 submitButton.addEventListener("click", function(event){
     event.preventDefault();
+    if(StopProcess === false && animating === false)
     console.log("foundButton");
     console.log(cityValue.value);
-    
+    beginProcess = false;
     if(cityValue.value === null||cityValue.value === ""){
     console.log("no value")}
     else{
-        if(setupFirst){
+        /*if(setupFirst){*/
             
             var activeElement = document.querySelector(".is-active-element");
             if(activeElement){
@@ -600,14 +606,16 @@ submitButton.addEventListener("click", function(event){
                     rides=true;
                     animate();
                     beginProcess = true;
-                    setupFirst = false
+                    /*setupFirst = false*/
                     
 
             }
-            else{
+            /*else{setupFirst = true;
             beginProcess = true;
-        }
-    }
+            console.log("else");*/
+            
+        
+    
   });
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
