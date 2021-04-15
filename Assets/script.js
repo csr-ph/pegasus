@@ -219,7 +219,9 @@ function center(){
         FindBikes(divInfo);
         rides=true;
         animate();
-    }   
+    }
+    else{
+        divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
     });
     
     /******************************/
@@ -248,10 +250,13 @@ function center(){
         divInfo.setAttribute("class","is-active-element listedInfo");
         active.append(divInfo);
         if(beginProcess){
-        divInfo.innerHTML= "<h3 class='has-text-centered' id = 'foodId'>finding food</h3>";
+        divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
         food=true;
         animate();
-}});
+        }  
+        else{
+            divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
+        });
 
 /*********************************/
     checkHotels.addEventListener("click", function(){
@@ -282,7 +287,10 @@ function center(){
         runHotels(divInfo);
         hotels = true;
         animate();
-}});
+        }  
+        else{
+            divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
+    });
     
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
@@ -499,7 +507,11 @@ submitButton.addEventListener("click", function(event){
     event.preventDefault();
     console.log("foundButton");
     console.log(cityValue.value);
-    beginProcess = true;
+    if(cityValue.value === null||cityValue.value === ""){
+    console.log("no value")}
+    else{
+        beginProcess = true;
+    }
   });
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
