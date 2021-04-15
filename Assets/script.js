@@ -15,6 +15,7 @@ beginRides = false;
 var rideFactor = 0;
 rides = false;
 bikeInfoArray = [];
+freeInfo = [];
 /*********hotel items****************/
 var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
 var secret = "2eaQeSGY6hS7hpd6"; 
@@ -344,13 +345,14 @@ function runFood(divInfo){
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
     
-
+    bikeInfoArray = [];
     hotelsArrayLat = [];
     hotelsArrayLng = [];
     hotelNameArray = [];
     phoneNumbers = [];
     rideLatArray = [];
     rideLongArray = [];
+    freeInfo = [];
     if(beginProcess){
 var city = cityValue.value;
 
@@ -474,13 +476,14 @@ StopProcess = false;
 /*************************Api for bikes******************************/
 function FindBikes(divInfo){
     
-
+    bikeInfoArray = []
     hotelsArrayLat = [];
     hotelsArrayLng = [];
     hotelNameArray = [];
     phoneNumbers = [];
     rideLatArray = [];
     rideLongArray = [];
+    freeInfo = [];
     console.log(cityValue.value);
     for(var i = 0; i < hardCoded.length; i++){
         if(hardCoded[i]===cityValue.value){
@@ -515,9 +518,29 @@ function FindBikes(divInfo){
                 for(var i = 0; i < data.network.stations.length; i++){
                     /*console.log(data.network.stations[0].latitude);*/
                     /*console.log(data.network.stations[i].latitude);
-                    console.log(data.network.stations[i].longitude); */      
-                    latForRides = data.network.stations[i].latitude;
-                    longForRides = data.network.stations[i].longitude;
+                    console.log(data.network.stations[i].longitude); */ 
+                    /*console.log(data.network.stations[i].extra.address);   */  
+                    /*console.log(typeof data.network.stations[i].free_bikes);*/
+                    /*if(data.network.stations[i].free_bikes > 0){*/
+                        /*freeBikeInfo = data.network.stations[i].free_bikes;*/
+                        latForRides = data.network.stations[i].latitude;
+                        longForRides = data.network.stations[i].longitude;
+                        /*freeInfo.push(freeBikeInfo);*/
+                        /*bikeAddress = data.network.stations[i].extra.address;*/
+                        console.log(data.network.stations.length);
+                        
+                        /*var bikeInfoForFreeBikes = document.createElement("p");
+                        bikeInfoForFreeBikes.setAttribute("class", "textEditP");
+                        bikeInfoForFreeBikes.textContent = "hello"[i];
+                        divInfo.append(bikeInfoForFreeBikes);
+*/
+                        /*if(bikeAddress === null|| bikeAddress ===""){
+                            bikeAddress = "Address not given";
+                        }
+                        else{bikeInfoArray.push(bikeAddress)
+                        console.log(data.network.stations[i].extra.address);     
+                        console.log(data.network.stations[i].free_bikes);}*/
+
                 if(rideLatArray.length === 0 && rideLongArray.length === 0){
                     rideLatArray[0]=latForRides;
                     rideLongArray[0]=longForRides;
@@ -531,36 +554,25 @@ function FindBikes(divInfo){
                     rideFactor ++;
                     MakeMarkerRides();
                     }
+                
+                
                 }
-                /*console.log(data.networks[i]);
-                console.log(data.networks[i].name);
                 
-                latForRides = data.networks[i].location.latitude;
-                longForRides = data.networks[i].location.longitude;*/
+                /*console.log(data.networks[i].name);*/
+        
+               /*for(var i = 0; i < bikeInfoArray.length; i++){
+                var useAbleNum = i + 1;
+                var bikeInfoForFreeBikes = document.createElement("p");
+                bikeInfoForFreeBikes.setAttribute("class", "textEditP");
+                bikeInfoForFreeBikes.textContent = freeInfo[i];
+
+                var bikesAdress = document.createElement("h2");
+                bikesAdress.setAttribute("class", "textEdit");
+                bikesAdress.textContent = useAbleNum + ". " + bikeInfoArray[i];
                 
-                /*if(rideLatArray.length === 0 && rideLongArray.length === 0){
-                rideLatArray[0]=latForRides;
-                rideLongArray[0]=longForRides;
-                
-                beginRides = true;
-                initMapR();
-                }*/
-            
-                /*rideLatArray.push(latForRides);
-                rideLongArray.push(longForRides);
-                rideFactor ++;
-                MakeMarkerRides();*/
-                
-               /* for(var i = 0; i < bikeInfoArray.length; i++){
-                var bikes = document.createElement("h2");*/
-                /*var bikeInfo = document.createElement("p");
-                bikeInfo.setAttribute("class", "textEditP")
-                var useAbleNum = i + 1;*/
-                /*bikes.setAttribute("class", "textEdit");
-                bikes.textContent = useAbleNum + ". " + bikeInfoArray[i];*/
-                /*bikeInfo.textContent = data.networks[i].name;
-                /*divInfo.append(bikes);*/
-                /*divInfo.append(bikeInfo);*/
+               console.log(bikesAdress);*/
+                /*divInfo.append(bikesAdress);*/
+              /* divInfo.append(bikeInfoForFreeBikes);*/
     })
 }
 }
@@ -570,7 +582,7 @@ StopProcess = false;
 }
 submitButton.addEventListener("click", function(event){
     event.preventDefault();
-    if(StopProcess === false && animating === false)
+    if(StopProcess === false && animating === false){
     console.log("foundButton");
     console.log(cityValue.value);
     beginProcess = false;
@@ -616,6 +628,35 @@ submitButton.addEventListener("click", function(event){
             
         
     
-  });
+}else{
+    console.log("not ready yet");
+}}
+);
+/******************************pop up modal***********************************/
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/

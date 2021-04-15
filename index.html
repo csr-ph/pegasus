@@ -79,8 +79,17 @@
                 <h3>What is Pegasus?</h3>
                 <p>Much like it's namesake, a mythical winged divine horse, Pegasus assists you in your travels to save time planning your trips.</p>
                 <h3>Why Choose Pegasus?</h3>
-                <p> Pegasus stream lines information with one click with your most importent needs coming first by easily navigating the interface.</p>
-                <button class="button is-black learnMore" type="submit">Learn More</button>
+                <p> Pegasus streamlines information with one click with your most importent needs coming first by easily navigating the interface.</p>
+                <button id="myBtn" class= "button is-black learnMore" type="submit">Learn More</button>
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Enter the destination city or if your already there enter your address to find the nearest areas of interest </p>
+                    </div>
+                  
+                  </div>
             </div>
             <form class="column is-3">
                 <p>Ride With Pegasus</p>
@@ -97,7 +106,7 @@
                     <option value="DEN">Denver</option>
                   </select>
                 <!--<label for="food">What Are You Craving</label><br>-->
-                <input type="text" id="current-location" name="current-location" placeholder="Current Location"><br>
+                <input type="text" id="current-location" name="current-location" placeholder="Current Street Address"><br>
 
                 <button class="button is-black" type="click" id = "submit">Show me my trip</button>
             </form>
