@@ -22,19 +22,39 @@
      
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <img src="./Assets/pegasus logo.png" alt="logo">
+                <img src="./Assets/pegasus logo.png" alt="logo" id="home">
             
                 <div id="navbarBasicExample" class="navbar-menu">
                     <div class="navbar-start is-align-items-flex-end textAlign"><!--is-align-items-flex-end pushes text to baseline-->
-                    <a class="navbar-item">
-                        Home
+                    <a class="navbar-item" href="#nav">
+                        Navigation
                     </a>
             
-                    <a class="navbar-item">
+                    <!--<a class="navbar-item">
                         Documentation
-                    </a>
-                    <!----------------------------------------------->
+                        
+                    </a>-->
                     <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                        Documentation
+                        </a>
+            
+                        <div class="navbar-dropdown">
+                        <a href="http://api.citybik.es/v2/" target="blank" class="navbar-item">
+                           City Bikes 
+                        </a>
+                        
+                        <a href="https://developers.amadeus.com/" target="blank" class="navbar-item">
+                            Amadeus
+                        </a>
+                        <!--<hr class="navbar-divider">-->
+                        <a href="https://developers.google.com/maps/documentation/javascript/overview"  target="blank" class="navbar-item">
+                            Google Maps
+                        </a>
+                        </div>
+                    </div>
+                    <!----------------------------------------------->
+                    <!--<div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
                         More
                         </a>
@@ -43,9 +63,7 @@
                         <a class="navbar-item">
                             About
                         </a>
-                        <a class="navbar-item">
-                            Jobs
-                        </a>
+                        
                         <a class="navbar-item">
                             Contact
                         </a>
@@ -54,7 +72,7 @@
                             Report an issue
                         </a>
                         </div>
-                    </div>
+                    </div>-->
                     <!----------------------------------------------->
                     </div>
                 </div>
@@ -73,7 +91,7 @@
             
             
         </div> <!---------------------------------------------------------->
-    <div class="container formInfo">
+    <div class="container formInfo" id = "nav">
         <div class="columns is-centered is-multiline">
             <div class="column is-3 leftSideInfo">
                 <h3>What is Pegasus?</h3>
@@ -90,11 +108,12 @@
                     </div>
                   
                   </div>
+                  <!------------------------------------>
             </div>
             <form class="column is-3">
                 <p>Ride With Pegasus</p>
-                <p>Sign Up</p><br>
-                <input type="text" id="yourName" name="yourName" placeholder=" First Name    Last Name"><br>
+                <!--<p>Sign Up</p><br>
+                <input type="text" id="yourName" name="yourName" placeholder=" First Name    Last Name"><br>-->
                 <!--<label for="city">Enter Your City</label><br>-->
                 <!----<input type="text" id="city" name="city" placeholder="Enter Your City"><br>-->
                 <select name="city" id="city"><br>
@@ -182,17 +201,17 @@
     <footer>
         <div class = "container">
             <div class = "columns is-centered">
-                <div class = "column is-2 infoFooter">
-                    <a>info</a><br>
-                    <a>info</a><br>
-                    <a>info</a><br>
+                <div class = "column infoFooter">
+                    <a href="#home">Home</a>
+                    <a href="#nav">Navigation</a>
+                    <a href="#map">Maps</a>
                 </div>
-                <div class = "column is-2 infoFooter">
+                <!--<div class = "column is-2 infoFooter">
                     <a>info</a><br>
                     <a>info</a><br>
                     <a>info</a><br>
 
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="columns is-centered">

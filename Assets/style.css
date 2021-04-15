@@ -91,6 +91,8 @@ form input{
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 300;
+    /*background-color: rgb(216, 213, 213);*/
+    
 }
 
 select{
@@ -108,7 +110,7 @@ form button{
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 300;
-    margin-top: 140px;
+    margin-top: 215px;
 }
 .formInfo{
     /*position: absolute;
@@ -225,6 +227,9 @@ a h3{
 footer{
     height: 200px;
 }
+footer a{
+    margin-right: 40px;
+    margin-left: 40px;}
 footer img{
     max-height: 75px;
     max-width: 75px;
@@ -236,12 +241,12 @@ a{
     color: rgb(175, 173, 173);
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 300
 }
 .infoFooter{
 padding-bottom: 25px;
 text-align: center;
-margin-top: 100px;
+margin-top: 150px;
 margin-bottom: 50px;
 /*border: springgreen solid;*/
 }
@@ -303,3 +308,8 @@ width: 70%;
     text-decoration: none;
     cursor: pointer;
   }
+  #city{
+    background-color: white;
+    margin-top: 20px;
+  }
+  

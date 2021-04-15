@@ -632,7 +632,7 @@ submitButton.addEventListener("click", function(event){
     console.log("not ready yet");
 }}
 );
-/******************************pop up modal***********************************/
+/******************************pop up modal for learn more***********************************/
 // Get the modal
 var modal = document.getElementById("myModal");
 
