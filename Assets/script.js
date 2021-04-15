@@ -43,6 +43,11 @@ var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 /************************************/
 function animate(){
 /********************************rides*/
@@ -123,27 +128,28 @@ var myVar = setInterval(function(){
 }
 /**********************************/
 
-let map;
+let mapH;
 function initMapH() {
-   
+    markers = [];
     if(begin){
         inputLat = parseFloat(hotelsArrayLat[factor]);
         inputLng = parseFloat(hotelsArrayLng[factor]);
         console.log(typeof inputLat);
-        map = new google.maps.Map(document.getElementById("map"), {
+        mapH = new google.maps.Map(document.getElementById("map"), {
         center: { lat: inputLat, lng: inputLng },
         zoom: 13,
     });}
 }
+let mapR
 /**********************************/
 function initMapR() {
-  
+    markers = [];
     if(beginRides){
         latForRides = parseFloat(rideLatArray[rideFactor]);
         longForRides = parseFloat(rideLongArray[rideFactor]);
         /*console.log(typeof latForRides);
         console.log(latForRides);*/
-        map = new google.maps.Map(document.getElementById("map"), {
+        mapR = new google.maps.Map(document.getElementById("map"), {
         center: { lat: latForRides, lng: longForRides},
         zoom: 15,
     });}
@@ -166,7 +172,7 @@ function MakeMarkerRides(){
         /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
         position: focalPoint,
-        map: map,
+        map: mapR,
    });
         markers.push(marker);
 }
@@ -187,42 +193,11 @@ function MakeMarkerRides(){
         /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
         position: focalPoint,
-        map: map,
+        map: mapH,
         
     });
         markers.push(marker);
 }
-/*function setMapOnAll(map) {
-    for (let i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-    }
-  }
-  
-  // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
-    setMapOnAll(null);
-  }
-  
-  // Shows any markers currently in the array.
-  function showMarkers() {
-    setMapOnAll(map);
-  }
-  
-  // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-  }*/
-/*function center(){ 
-    console.log(map);
-    map,{
-    center: new google.maps.LatLng(inputLat,inputLng),
-
-
-};
-}*/    
-
-
 /************************************/
 
     checkRides.addEventListener("click", function()
@@ -250,8 +225,11 @@ function MakeMarkerRides(){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding bikes</h3>";
         FindBikes(divInfo);
         rides=true;
-        animate();
         markers = [];
+        var maps = document.getElementById("map")
+        removeAllChildNodes(maps);
+        animate();
+        
     }
     else{
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -285,8 +263,11 @@ function MakeMarkerRides(){
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
         food=true;
-        animate();
         markers = [];
+        
+        var maps = document.getElementById("map")
+        removeAllChildNodes(maps);
+        animate();
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -320,9 +301,11 @@ function MakeMarkerRides(){
         /*divInfo.innerHTML= cityValue.value;*/
         runHotels(divInfo);
         hotels = true;
-        animate();
         markers = [];
-
+        
+        var maps = document.getElementById("map")
+        removeAllChildNodes(maps);
+        animate();
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -330,6 +313,13 @@ function MakeMarkerRides(){
     
   /********************************************API for hotels**************************************************/
 function runHotels(divInfo){
+    
+    hotelsArrayLat = [];
+    hotelsArrayLng = [];
+    hotelNameArray = [];
+    phoneNumbers = [];
+    rideLatArray = [];
+    rideLongArray = [];
     if(beginProcess){
 var city = cityValue.value;
 
@@ -371,6 +361,7 @@ return resp.json();
 // Log the pet data
 console.log('hotels', data);
 /*divInfo.innerHTML= "";*/
+factor = 0;
 for(var i = 0; i < data.data.length; i++){
 inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
@@ -385,7 +376,7 @@ if(hotelName!="TEST CONTENT"){
     }
     else if(data.data[i].hotel.contact != null){
 hotelPhone = data.data[i].hotel.contact.phone;
-console.log(hotelPhone);
+/*console.log(hotelPhone);*/
 phoneNumbers.push(hotelPhone);
 }
 else{
@@ -400,14 +391,15 @@ hotelsArrayLng[0] = inputLng;
 
 hotelNameArray[0]= hotelName;
 begin = true;
+/*markers = [];*/
 initMapH();
 
 }
 else{ 
 if(hotelName!="TEST CONTENT"){
 hotelNameArray.push(hotelName);
-console.log(hotelsArrayLng);
-console.log(hotelsArrayLng);
+/*console.log(hotelsArrayLng);
+console.log(hotelsArrayLng);*/
 hotelsArrayLat.push(inputLat);
 hotelsArrayLng.push(inputLng);
 /*phoneNumbers.push(hotelPhone);*/
@@ -423,8 +415,8 @@ MakeMarkerHotels();
 
 }
 /******************adding hotel names**********************************/
-console.log(hotelNameArray);
-console.log(phoneNumbers);
+/*console.log(hotelNameArray);
+console.log(phoneNumbers);*/
 for(var i = 0; i < hotelNameArray.length; i++){
 var ListOfHotels = document.createElement("h2");
 var phoneNum = document.createElement("p");
@@ -447,6 +439,13 @@ console.log('something went wrong', err);
 };
 /*************************Api for bikes******************************/
 function FindBikes(divInfo){
+    
+    hotelsArrayLat = [];
+    hotelsArrayLng = [];
+    hotelNameArray = [];
+    phoneNumbers = [];
+    rideLatArray = [];
+    rideLongArray = [];
     console.log(cityValue.value);
     for(var i = 0; i < hardCoded.length; i++){
         if(hardCoded[i]===cityValue.value){
@@ -477,6 +476,7 @@ function FindBikes(divInfo){
             fetch("http://api.citybik.es" + href).then(function(response){
             return response.json();
             }).then(function(data){
+                rideFactor = 0;
                 for(var i = 0; i < data.network.stations.length; i++){
                     /*console.log(data.network.stations[0].latitude);*/
                     /*console.log(data.network.stations[i].latitude);
@@ -488,6 +488,7 @@ function FindBikes(divInfo){
                     rideLongArray[0]=longForRides;
                 
                     beginRides = true;
+                    /*markers = [];*/
                     initMapR();
                     } 
                     else{rideLatArray.push(latForRides);
@@ -496,11 +497,6 @@ function FindBikes(divInfo){
                     MakeMarkerRides();
                     }
                 }
-                   
-            
-           
-            
-            
                 /*console.log(data.networks[i]);
                 console.log(data.networks[i].name);
                 
@@ -530,10 +526,6 @@ function FindBikes(divInfo){
                 /*bikeInfo.textContent = data.networks[i].name;
                 /*divInfo.append(bikes);*/
                 /*divInfo.append(bikeInfo);*/
-             
-                
-            
-               
     })
 }
 }
