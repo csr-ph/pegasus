@@ -2,8 +2,10 @@
 
 var distance;
 var yourMarker;
-var adress = "Westminster, London SW1A 1AA"
-var adress = "204 Freedom Trail, Boston, MA 02113"
+var adress1 = "Westminster, London SW1A 1AA"
+var adress2 = "204 Freedom Trail, Boston, MA 02113"
+var address3 = "59 Washington Square S, Manhattan, NY 10012"
+var address4 = "1509-1599 N Morgan St, Tampa, FL 33602"
 var markers = [];
 StopProcess = false;
 animating = false;
@@ -735,7 +737,11 @@ submitButton.addEventListener("click", function(event){
         else{
             console.log(currentLocal.value);
             fetchMeMyAddressLatLang();
-            
+            /************************************************/
+            localStorage.setItem("lastSearch", currentLocal.value);
+           /* var previousSearch = localStorage.getItem("lastSearch");*/
+            console.log(previousSearch)
+            /************************************************/
             var activeElement = document.querySelector(".is-active-element");
             if(activeElement){
                 activeElement.remove();
@@ -803,5 +809,33 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+/******************************pop up modal for previous searches***********************************/
+// Get the modal
+var pmodal = document.getElementById("previousModal");
 
+// Get the button that opens the modal
+var pbtn = document.getElementById("previous");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("pclose")[0];
+var prevSearch = document.createElement("p");
+var previousSearch = localStorage.getItem("lastSearch");
+prevSearch.textContent = previousSearch
+span.appendChild(prevSearch);
+// When the user clicks the button, open the modal 
+pbtn.onclick = function() {
+  pmodal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  pmodal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {event.preventDefault();
+  if (event.target == pmodal) {
+    pmodal.style.display = "none";
+  }
+}
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/

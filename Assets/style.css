@@ -106,11 +106,21 @@ select{
     font-size: 15px;
     font-weight: 300;
 }
+#submit{
+    margin-top: 165px;
+}
 form button{
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     font-weight: 300;
-    margin-top: 215px;
+   
+    margin-bottom: 10px;
+}
+.buttonPrevious{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    
 }
 .formInfo{
     /*position: absolute;
@@ -311,5 +321,15 @@ width: 70%;
   #city{
     background-color: white;
     margin-top: 20px;
+  }
+  .modal-content-previous {
+    background-color: #000000;
+    margin: auto;
+    padding: 20px;
+    /*border: 1px solid #888;*/
+    width: 20%;
+    color:white;
+    border-radius: 10px;
+    height:auto
   }
   
