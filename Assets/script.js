@@ -744,7 +744,14 @@ submitButton.addEventListener("click", function(event){
     if(cityValue.value === null||cityValue.value === ""){
     console.log("no value")}
     else{
-       
+        if(currentLocal.value ===null||currentLocal.value ===""){
+            console.log("currentLocal")
+        console.log("need a value");}
+        
+        
+        else{
+            console.log(currentLocal.value);
+            fetchMeMyAddressLatLang();
             
             var activeElement = document.querySelector(".is-active-element");
             if(activeElement){
@@ -776,9 +783,9 @@ submitButton.addEventListener("click", function(event){
                     beginProcess = true;
                     setupFirst = false
                 }
-                    
-
+                
             }
+        }
             /*else{setupFirst = true;
             beginProcess = true;
             console.log("else");*/
@@ -788,9 +795,7 @@ submitButton.addEventListener("click", function(event){
 }else{
     console.log("not ready yet");
 }
-if(currentLocal.value != null){console.log("currentLocal")
-console.log(currentLocal.value)};
-fetchMeMyAddressLatLang();
+
 }
 
 );
