@@ -1,11 +1,14 @@
 
 
+var finished = false;
 var distance;
 var yourMarker;
 var adress1 = "Westminster, London SW1A 1AA"
 var adress2 = "204 Freedom Trail, Boston, MA 02113"
 var address3 = "59 Washington Square S, Manhattan, NY 10012"
 var address4 = "1509-1599 N Morgan St, Tampa, FL 33602"
+var address5 = "12154 East Easter Avenue, Centennial, CO 80112"
+
 var markers = [];
 StopProcess = false;
 animating = false;
@@ -261,8 +264,9 @@ function initMapR() {
 /******************************************************* */
 function MakeMarkerRides(){
     for(var i = 0; i < rideLatArray.length+1; i ++){
-    /*console.log(rideFactor);*/
+    
         if(rideFactor === 0){
+            console.log(rideFactor);
             latForRides = parseFloat(yourMarker.lat);
             longForRides = parseFloat(yourMarker.lng);
             /*yourMarker = null;*/
@@ -289,7 +293,10 @@ function MakeMarkerRides(){
         latForRides = parseFloat(rideLatArray[rideFactor-1]);
         longForRides = parseFloat(rideLongArray[rideFactor-1]);
         /*console.log(factor);*/
+        /*console.log(rideFactor);*/
         // The location of focalPoint
+        /*console.log(latForRides);*/
+
         const focalPoint = {lat: latForRides, lng: longForRides};
         // The map, centered at focalPoint
         var number = rideFactor;
@@ -671,7 +678,7 @@ function FindBikes(divInfo){
                         latForRides = data.network.stations[i].latitude;
                         longForRides = data.network.stations[i].longitude;
                         getDistanceFromLatLonInKm(yourMarker.lat, yourMarker.lng, latForRides,longForRides);
-                        
+                        /**console.log(distance);*/
                 if(distance<=1){
                 if(rideLatArray.length === 0 && rideLongArray.length === 0){
                     rideLatArray[0]=latForRides;
@@ -681,7 +688,7 @@ function FindBikes(divInfo){
                     beginRides = true;
                     initMapR();
                     } 
-                    else{rideLatArray.push(latForRides);
+                else{rideLatArray.push(latForRides);
                     rideLongArray.push(longForRides);
                      var address = (data.network.stations[i].extra.name);
                      console.log(address);
@@ -701,12 +708,69 @@ function FindBikes(divInfo){
                     bikeInfoForFreeBikes.textContent = info + " " + "Free bikes";
                     divInfo.append(bikeInfoForFreeBikes);
                     useAbleNum++;   
+                    
+                    finished = true;
+                    }
+                    
+                }
+                
+            }
+            
+                if(finished === false){
+                    
+                    for(var j = 0; j < data.network.stations.length; j++){
+                        latForRides = data.network.stations[j].latitude;
+                        longForRides = data.network.stations[j].longitude;
+                    
+                        if(rideLatArray.length === 0 && rideLongArray.length === 0){
+                    console.log("override");
+                    rideLatArray[0]=latForRides;
+                    rideLongArray[0]=longForRides;
+                    bikeAddressArray[0] = data.network.stations[j].extra.name;
+                    bikeInfoArray[0] = data.network.stations[j].free_bikes;
+                    beginRides = true;
+                    initMapR();
+                    } 
+                    else{
+                    rideLatArray.push(latForRides);   
+                    /*console.log("got here")*/
+                    rideLongArray.push(longForRides);
+                    
+                    /*console.log(rideLongArray[j]);*/
+                    /*console.log(j);*/
+                    if(data.network.stations[j].extra.name != null){
+                     var address = data.network.stations[j].extra.name;}
+                    else if(data.network.stations[j].extra.address != null){
+                     /*console.log(data.network.stations[j].extra);*/
+                     var address = data.network.stations[j].extra.address;}
+                    
+                    if(data.network.stations[j].empty_slots != null){
+                        var info = data.network.stations[j].empty_slots;
+                     }
+                    else if(data.network.stations[j].free_bikes!=null){
+                        var info = data.network.stations[j].free_bikes;
+                    }
+                    
+                    
+                   
+
+                    var bikesAdress = document.createElement("h2");
+                    bikesAdress.setAttribute("class", "textEdit");
+                    bikesAdress.textContent = useAbleNum + ". " + address;
+                    divInfo.append(bikesAdress); 
+
+                    var bikeInfoForFreeBikes = document.createElement("p");
+                    bikeInfoForFreeBikes.setAttribute("class", "textEditP");
+                    bikeInfoForFreeBikes.textContent = info + " " + "Free bikes";
+                    divInfo.append(bikeInfoForFreeBikes);
+                    useAbleNum++;   
                         
                     
                     }
                 }
-                
+            
             }
+            
                 MakeMarkerRides();
     })
 }
