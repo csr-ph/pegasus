@@ -15,7 +15,7 @@ var longForRides = 100;
 var rideLatArray = [];
 var rideLongArray = [];
 beginRides = false;
-var rideFactor = -1;
+var rideFactor = 0;
 rides = false;
 bikeInfoArray = [];
 freeInfo = [];
@@ -33,7 +33,7 @@ hotels= false;
 food = false;
 /********************/
 begin = false;
-var factor = -1;
+var factor = 0;
 rides = false;
 food = false;
 hotels = false;
@@ -49,7 +49,25 @@ var checkHotels = document.getElementById("hotels");
 var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
-
+/*********************determine 2 points*********************************/
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+  /******************************************************/
 function fetchMeMyAddressLatLang(){
     fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + currentLocal.value + "&key=AIzaSyB4oWBt6y4Uj1PPGR5T66y2gb3oojz0XCo")
     .then(function(response){
@@ -223,6 +241,7 @@ function initMapR() {
         center: { lat: latForRides, lng: longForRides},
         zoom: 15,
     });}}
+    console.log("good");
 }
 
 
@@ -230,8 +249,8 @@ function initMapR() {
 /******************************************************* */
 /******************************************************* */
 function MakeMarkerRides(){
+    for(var i = 0; i < rideLatArray.length+1; i ++){
     /*console.log(rideFactor);*/
-        /*console.log(factor);*/
         if(rideFactor === 0){
             latForRides = parseFloat(yourMarker.lat);
             longForRides = parseFloat(yourMarker.lng);
@@ -252,28 +271,34 @@ function MakeMarkerRides(){
             map: mapR,
             
 
-        })}
+        })
+        }
+
         else{
-        latForRides = parseFloat(rideLatArray[rideFactor]);
-        longForRides = parseFloat(rideLongArray[rideFactor]);
+        latForRides = parseFloat(rideLatArray[rideFactor-1]);
+        longForRides = parseFloat(rideLongArray[rideFactor-1]);
         /*console.log(factor);*/
         // The location of focalPoint
         const focalPoint = {lat: latForRides, lng: longForRides};
         // The map, centered at focalPoint
-        var number = rideFactor + 1;
+        var number = rideFactor;
         const marker = new google.maps.Marker({
         icon: "http://maps.google.com/mapfiles/kml/shapes/cycling.png",
         label: {color: 'white', fontSize: '12px', fontWeight: '600',
-        /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
         position: focalPoint,
         map: mapR,
    });
         markers.push(marker);
         
+        
+
+}
+rideFactor ++;
 }}
 /****************************************************/    
-    function MakeMarkerHotels(){
+    function MakeMarkerHotels(){console.log(hotelsArrayLat.length);
+        for(var i = 0; i < hotelsArrayLat.length +1; i ++){
         if(factor===0){
             latForRides = parseFloat(yourMarker.lat);
             longForRides = parseFloat(yourMarker.lng);
@@ -294,21 +319,25 @@ function MakeMarkerRides(){
             position: focalPoint,
             map: mapH,
             
-        })}
+        })
+        
+    }
         else{
-                   
-        inputLat = parseFloat(hotelsArrayLat[factor]);
-        inputLng = parseFloat(hotelsArrayLng[factor]);
+        
+        console.log(factor-1);         
+        inputLat = parseFloat(hotelsArrayLat[factor-1]);
+        inputLng = parseFloat(hotelsArrayLng[factor-1]);
         /*console.log(factor);*/
         // The location of focalPoint
         const focalPoint = {lat: inputLat, lng: inputLng};
         // The map, centered at focalPoint
-        var number = factor + 1;
+        /**at this point its 1 so good to go for text**/
+        var number = factor;
         const marker = new google.maps.Marker({
         icon:"http://maps.google.com/mapfiles/kml/shapes/lodging.png",
         label: {color: '#000', fontSize: '12px', fontWeight: '600',
-        /*text: hotelNameArray[factor] + number.toString()},*/
-        text: number.toString()},
+        text:number.toString()},
+        /*text: number.toString()},*/
         position: focalPoint,
         map: mapH,
         
@@ -317,13 +346,14 @@ function MakeMarkerRides(){
         
         
 
+}       factor ++;
 }}
 /************************************/
 
     checkRides.addEventListener("click", function()
     {
         if(StopProcess === false && animating === false){
-       
+       markers = [];
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -368,7 +398,7 @@ function MakeMarkerRides(){
     
     checkFood.addEventListener("click", function(){
         if(StopProcess === false && animating === false){
-       
+            markers = [];
         var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -411,7 +441,7 @@ function MakeMarkerRides(){
 /*********************************/
     checkHotels.addEventListener("click", function(){
         if(StopProcess === false && animating === false){
-        
+            markers = [];
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -509,7 +539,7 @@ return resp.json();
 // Log the pet data
 console.log('hotels', data);
 /*divInfo.innerHTML= "";*/
-factor = -1;
+factor = 0;
 for(var i = 0; i < data.data.length; i++){
 inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
@@ -554,8 +584,8 @@ hotelsArrayLng.push(inputLng);
 /*console.log(inputLng);
 console.log(inputLat);*/
 /*console.log(hotelNameArray);*/
-factor ++;
-MakeMarkerHotels();
+/*console.log(hotelNameArray);*/
+/*factor ++;*/
 /*center();*/
 }
 
@@ -563,6 +593,7 @@ MakeMarkerHotels();
 
 
 }
+MakeMarkerHotels();
 /******************adding hotel names**********************************/
 /*console.log(hotelNameArray);
 console.log(phoneNumbers);*/
@@ -585,6 +616,8 @@ console.log('something went wrong', err);
 });
 
 }
+console.log("got here");
+
 StopProcess = false;
 
 };
@@ -629,7 +662,7 @@ function FindBikes(divInfo){
             fetch("http://api.citybik.es" + href).then(function(response){
             return response.json();
             }).then(function(data){
-                rideFactor = -1;
+                rideFactor = 0;
                 for(var i = 0; i < data.network.stations.length; i++){
                     /*console.log(data.network.stations[0].latitude);*/
                     /*console.log(data.network.stations[i].latitude);
@@ -666,12 +699,14 @@ function FindBikes(divInfo){
                     } 
                     else{rideLatArray.push(latForRides);
                     rideLongArray.push(longForRides);
-                    rideFactor ++;
-                    MakeMarkerRides();
+                    
+                    
+                    /*rideFactor ++;*/
                     }
                 
                 
                 }
+                MakeMarkerRides();
                 
                 /*console.log(data.networks[i].name);*/
         
@@ -692,6 +727,7 @@ function FindBikes(divInfo){
 }
 }
 })
+
 StopProcess = false;
 
 }
