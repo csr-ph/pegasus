@@ -1,18 +1,21 @@
+var yourMarker;
+var adress = "Westminster, London SW1A 1AA"
+var adress = "204 Freedom Trail, Boston, MA 02113"
 var markers = [];
 StopProcess = false;
 animating = false;
 setupFirst = true;
 beginProcess = false;
 var usableTerm;
-var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS"];
-var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
+var hardCoded = ["LON", "ATL", "TPA", "LAX", "NYC", "DEN", "BOS"];
+var realNames = ["London","Atlanta, GA", "Tampa, FL", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
 /*********Ride items*****************/
 var latForRides = 100;
 var longForRides = 100;
 var rideLatArray = [];
 var rideLongArray = [];
 beginRides = false;
-var rideFactor = 0;
+var rideFactor = -1;
 rides = false;
 bikeInfoArray = [];
 freeInfo = [];
@@ -30,12 +33,13 @@ hotels= false;
 food = false;
 /********************/
 begin = false;
-var factor = 0;
+var factor = -1;
 rides = false;
 food = false;
 hotels = false;
 var number = 0
 var cityValue = document.getElementById("city");
+var currentLocal = document.getElementById("current-location");
 var submitButton = document.getElementById("submit");
 /*active slot*/
 console.log(submitButton);
@@ -45,6 +49,24 @@ var checkHotels = document.getElementById("hotels");
 var checkFood = document.getElementById("restaurants");
 
 var active = document.getElementById("holder");
+
+function fetchMeMyAddressLatLang(){
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + currentLocal.value + "&key=AIzaSyB4oWBt6y4Uj1PPGR5T66y2gb3oojz0XCo")
+    .then(function(response){
+        return response.json()
+        .then(function(data){
+            console.log(data.results[0].geometry.location);
+            yourMarker = data.results[0].geometry.location;
+        console.log("hello");
+    })}).catch(function (err) {
+
+        // Log any errors
+        console.log('something went wrong', err);
+        
+        });
+        
+        };
+        
 
 
 function removeAllChildNodes(parent) {
@@ -73,10 +95,12 @@ var myVar = setInterval(function(){
                 else if(number===4){
                     bikes.textContent = 'Found bikes in your area.';
                     /*bikes.removeAttribute("class","has-text-centered");*/
-                    number = 0;  
+                    number = 0;
+                    if(StopProcess === false){  
                     animating = false;
                     clearInterval(myVar); 
-                    
+                    }
+                    else(animate());
    
                 };
     
@@ -103,8 +127,11 @@ var myVar = setInterval(function(){
                             /*hotels.removeAttribute("class","has-text-centered");*/
                                
                             number = 0;  
-                            animating = false;
-                            clearInterval(myVar);
+                            if(StopProcess === false){  
+                                animating = false;
+                                clearInterval(myVar); 
+                                }
+                                else(animate());
                         };
             
             console.log(number)
@@ -131,8 +158,11 @@ var myVar = setInterval(function(){
                         /*foods.removeAttribute("class","has-text-centered");*/
                         
                         number = 0;  
-                        animating = false;
-                        clearInterval(myVar);
+                        if(StopProcess === false){  
+                            animating = false;
+                            clearInterval(myVar); 
+                            }
+                            else(animate());
                     };
         
         console.log(number)
@@ -147,20 +177,44 @@ var myVar = setInterval(function(){
 let mapH;
 function initMapH() {
     markers = [];
+    
     if(begin){
+        if(yourMarker!= null){
+            console.log("your Marker Works")
+            inputLat = parseFloat(yourMarker.lat);
+            inputLng = parseFloat(yourMarker.lng);
+            console.log(typeof inputLat);
+            mapH = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: inputLat, lng: inputLng },
+            zoom: 13,
+    });
+        }
+        else{
         inputLat = parseFloat(hotelsArrayLat[factor]);
         inputLng = parseFloat(hotelsArrayLng[factor]);
         console.log(typeof inputLat);
         mapH = new google.maps.Map(document.getElementById("map"), {
         center: { lat: inputLat, lng: inputLng },
         zoom: 13,
-    });}
+    });}}
 }
 let mapR
 /**********************************/
 function initMapR() {
     markers = [];
     if(beginRides){
+        if(yourMarker != null){
+            console.log("your Marker Works")
+            inputLat = parseFloat(yourMarker.lat);
+            inputLng = parseFloat(yourMarker.lng);
+            console.log(inputLat);
+            console.log(typeof inputLat);
+            mapR= new google.maps.Map(document.getElementById("map"), {
+            center: { lat: inputLat, lng: inputLng },
+            zoom: 15,
+    });
+        }
+        else{
         latForRides = parseFloat(rideLatArray[rideFactor]);
         longForRides = parseFloat(rideLongArray[rideFactor]);
         /*console.log(typeof latForRides);
@@ -168,22 +222,47 @@ function initMapR() {
         mapR = new google.maps.Map(document.getElementById("map"), {
         center: { lat: latForRides, lng: longForRides},
         zoom: 15,
-    });}
+    });}}
 }
+
+
+
+/******************************************************* */
 /******************************************************* */
 function MakeMarkerRides(){
+    /*console.log(rideFactor);*/
         /*console.log(factor);*/
+        if(rideFactor === 0){
+            latForRides = parseFloat(yourMarker.lat);
+            longForRides = parseFloat(yourMarker.lng);
+            /*yourMarker = null;*/
+            console.log(yourMarker);
+            const focalPoint = {lat: latForRides, lng: longForRides};
+            // The map, centered at focalPoint
+            var number = rideFactor;
+            const marker = new google.maps.Marker({
+                
+                optimized: false,
+                zIndex:99999999,  
+            icon: "http://maps.google.com/mapfiles/kml/shapes/man.png",
+            label: {color: 'red', fontSize: '30px', fontWeight: '600',
+            /*text: hotelNameArray[factor] + number.toString()},*/
+            text: "YOU ARE HERE"},
+            position: focalPoint,
+            map: mapR,
+            
+
+        })}
+        else{
         latForRides = parseFloat(rideLatArray[rideFactor]);
         longForRides = parseFloat(rideLongArray[rideFactor]);
         /*console.log(factor);*/
         // The location of focalPoint
         const focalPoint = {lat: latForRides, lng: longForRides};
         // The map, centered at focalPoint
-        var number = rideFactor;
+        var number = rideFactor + 1;
         const marker = new google.maps.Marker({
         icon: "http://maps.google.com/mapfiles/kml/shapes/cycling.png",
-        /*icon: "http://maps.google.com/mapfiles/kml/paddle/blu-blank-lv.png",*/
-        /*icon: "http://maps.google.com/mapfiles/kml/paddle/blu-blank.png",*/
         label: {color: 'white', fontSize: '12px', fontWeight: '600',
         /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
@@ -192,9 +271,31 @@ function MakeMarkerRides(){
    });
         markers.push(marker);
         
-}
+}}
 /****************************************************/    
     function MakeMarkerHotels(){
+        if(factor===0){
+            latForRides = parseFloat(yourMarker.lat);
+            longForRides = parseFloat(yourMarker.lng);
+            /*yourMarker = null;*/
+            const focalPoint = {lat: latForRides, lng: longForRides};
+            // The map, centered at focalPoint
+            var number = rideFactor;
+            const marker = new google.maps.Marker({
+                
+                optimized: false,
+                zIndex:99999999,            
+                icon: "http://maps.google.com/mapfiles/kml/shapes/man.png",
+            
+            label: {color: 'red', fontSize: '30px', fontWeight: '600',
+            
+            /*text: hotelNameArray[factor] + number.toString()},*/
+            text: "YOU ARE HERE"},
+            position: focalPoint,
+            map: mapH,
+            
+        })}
+        else{
                    
         inputLat = parseFloat(hotelsArrayLat[factor]);
         inputLng = parseFloat(hotelsArrayLng[factor]);
@@ -205,7 +306,6 @@ function MakeMarkerRides(){
         var number = factor + 1;
         const marker = new google.maps.Marker({
         icon:"http://maps.google.com/mapfiles/kml/shapes/lodging.png",
-        /*icon:"http://maps.google.com/mapfiles/kml/paddle/wht-blank.png",*/
         label: {color: '#000', fontSize: '12px', fontWeight: '600',
         /*text: hotelNameArray[factor] + number.toString()},*/
         text: number.toString()},
@@ -215,15 +315,15 @@ function MakeMarkerRides(){
     });
         markers.push(marker);
         
+        
 
-}
+}}
 /************************************/
 
     checkRides.addEventListener("click", function()
     {
         if(StopProcess === false && animating === false){
-        StopProcess = true;
-        animating = true;
+       
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -235,14 +335,20 @@ function MakeMarkerRides(){
     checkFood.removeAttribute("class","is-active");
     checkHotels.removeAttribute("class","is-active");
     console.log("found");
+    checkRides.setAttribute("class","is-active");
+    var divInfo = document.createElement("div");
+    divInfo.setAttribute("class","is-active-element listedInfo");
+    active.append(divInfo);
+    divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>"
     }
     else{console.log("not found");
     }
-        checkRides.setAttribute("class","is-active");
+    if(setupFirst === false){
+        StopProcess = true;   
+        animating = true;
+        /*checkRides.setAttribute("class","is-active");*/
 
-        var divInfo = document.createElement("div");
-        divInfo.setAttribute("class","is-active-element listedInfo");
-        active.append(divInfo);
+        
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'bikeId'>Finding bikes</h3>";
         FindBikes(divInfo);
@@ -255,15 +361,14 @@ function MakeMarkerRides(){
     }
     else{
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-    }});
+    }}});
     
     /******************************/
  
     
     checkFood.addEventListener("click", function(){
         if(StopProcess === false && animating === false){
-        StopProcess = true;
-        animating = true;
+       
         var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -275,15 +380,20 @@ function MakeMarkerRides(){
     checkRides.removeAttribute("class","is-active");
     checkHotels.removeAttribute("class","is-active");
     console.log("found");
+    checkFood.setAttribute("class","is-active");
+    var divInfo = document.createElement("div");
+    divInfo.setAttribute("class","is-active-element listedInfo");
+    active.append(divInfo);
+    divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";
     }
     else{console.log("not found");
     }
-        checkFood.setAttribute("class","is-active");
+    if(setupFirst === false){
+        StopProcess = true;   
+        animating = true;
+        /*checkFood.setAttribute("class","is-active");*/
 
-        var divInfo = document.createElement("div");
-        
-        divInfo.setAttribute("class","is-active-element listedInfo");
-        active.append(divInfo);
+       
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
         runFood(divInfo);
@@ -296,13 +406,12 @@ function MakeMarkerRides(){
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-    }});
+    }}});
 
 /*********************************/
     checkHotels.addEventListener("click", function(){
         if(StopProcess === false && animating === false){
-        StopProcess = true;   
-        animating = true;
+        
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
@@ -314,15 +423,21 @@ function MakeMarkerRides(){
     checkFood.removeAttribute("class","is-active");
     checkRides.removeAttribute("class","is-active");
     console.log("found");
+    checkHotels.setAttribute("class","is-active");
+    var divInfo = document.createElement("div");
+    divInfo.setAttribute("class","is-active-element listedInfo");
+    active.append(divInfo);
+    divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>"
     }
     else{console.log("not found");
     }
-    
-        checkHotels.setAttribute("class","is-active");
+    if(setupFirst === false){
+        StopProcess = true;   
+        animating = true;
+        
+        /*checkHotels.setAttribute("class","is-active");*/
 
-        var divInfo = document.createElement("div");
-        divInfo.setAttribute("class","is-active-element listedInfo");
-        active.append(divInfo);
+        
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered' id = 'hotelId'>Finding hotels</h3>";
         /*divInfo.innerHTML= cityValue.value;*/
@@ -336,7 +451,7 @@ function MakeMarkerRides(){
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
-    }});
+    }}});
 /***************************API for food******************************/
 function runFood(divInfo){
     
@@ -394,7 +509,7 @@ return resp.json();
 // Log the pet data
 console.log('hotels', data);
 /*divInfo.innerHTML= "";*/
-factor = 0;
+factor = -1;
 for(var i = 0; i < data.data.length; i++){
 inputLat = data.data[i].hotel.latitude;
 inputLng = data.data[i].hotel.longitude;
@@ -514,7 +629,7 @@ function FindBikes(divInfo){
             fetch("http://api.citybik.es" + href).then(function(response){
             return response.json();
             }).then(function(data){
-                rideFactor = 0;
+                rideFactor = -1;
                 for(var i = 0; i < data.network.stations.length; i++){
                     /*console.log(data.network.stations[0].latitude);*/
                     /*console.log(data.network.stations[i].latitude);
@@ -580,7 +695,11 @@ function FindBikes(divInfo){
 StopProcess = false;
 
 }
+
 submitButton.addEventListener("click", function(event){
+    if(setupFirst === false){
+        setupFirst = true
+    };
     event.preventDefault();
     if(StopProcess === false && animating === false){
     console.log("foundButton");
@@ -589,7 +708,7 @@ submitButton.addEventListener("click", function(event){
     if(cityValue.value === null||cityValue.value === ""){
     console.log("no value")}
     else{
-        /*if(setupFirst){*/
+       
             
             var activeElement = document.querySelector(".is-active-element");
             if(activeElement){
@@ -606,6 +725,7 @@ submitButton.addEventListener("click", function(event){
             else{
                 console.log("not found");
             }
+             if(setupFirst){
                 checkRides.setAttribute("class","is-active");
                     StopProcess = true;
                     animating = true;
@@ -618,7 +738,8 @@ submitButton.addEventListener("click", function(event){
                     rides=true;
                     animate();
                     beginProcess = true;
-                    /*setupFirst = false*/
+                    setupFirst = false
+                }
                     
 
             }
@@ -630,7 +751,12 @@ submitButton.addEventListener("click", function(event){
     
 }else{
     console.log("not ready yet");
-}}
+}
+if(currentLocal.value != null){console.log("currentLocal")
+console.log(currentLocal.value)};
+fetchMeMyAddressLatLang();
+}
+
 );
 /******************************pop up modal for learn more***********************************/
 // Get the modal

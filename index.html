@@ -119,15 +119,16 @@
                 <select name="city" id="city"><br>
                     <option value="" disabled selected>Enter Your Destination City</option>
                     <option value="LON">London</option>
-                    <option value="PHX">Pheonix</option>
+                    <option value="ATL">Atlanta, GA</option>
+                    <option value="TPA">Tampa</option>
                     <option value="NYC">New York City</option>
                     <option value="LAX">Los Angeles</option>
                     <option value="DEN">Denver</option>
                     <option value ="BOS">Boston</option>
                   </select>
                 <!--<label for="food">What Are You Craving</label><br>-->
-                <input type="text" id="current-location" name="current-location" placeholder="Current Street Address"><br>
-
+                <input type="text" id="current-location" name="current-location" placeholder="Point of Interest Address"><br>
+                
                 <button class="button is-black" type="click" id = "submit">Show me my trip</button>
             </form>
         </div>
@@ -223,6 +224,6 @@
     <script src="./Assets/script.js"></script>
     <!--<script src="./Assets/testApi.js"></script>-->
     <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDZprocu6T52CA1VZR6LlvdZb_OB0X2jeY"></script>
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </body>
 </html>
