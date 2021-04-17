@@ -1,0 +1,313 @@
+h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+}
+p{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+h3{
+    font-family: 'Nunito Sans',re sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+
+}
+h4{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    width: 170px;
+    text-align: center;
+}
+.blackGutterOne{
+    background-color: black;
+    height: 2000px;
+    position: fixed;
+    width: 70px;
+    left: 0;
+}
+.blackGutterTwo{
+    background-color: black;
+    height: 2000px;
+    position: fixed;
+    width: 70px;
+    right: 0;
+    
+}
+
+.textAlign{
+    margin-bottom: 6px;
+    margin-left: 10px;
+}
+.mainPic{
+    border:  1px solid;
+    position: relative;
+    color: white;
+    
+}
+
+nav{
+    height: 6rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    
+}
+nav img{
+    margin-bottom: 4px;
+    margin-top: 6px;    
+}
+.bottom-left {
+    position: absolute;
+    bottom: 45px;
+    left: 30px;
+    width: 300px;
+    word-wrap: break-word;
+    line-height: 100%;
+}
+.leftSideInfo{
+    margin-top:50px;
+    margin-left: 50px;
+}
+/*learnMore is left hand button*/
+.learnMore{
+    margin-top:95px;
+    width: 150px;
+}
+form{
+    background-color: rgb(42, 42, 51);
+    color:white;
+    height: 400px;
+}
+form input{
+    width: 100%;
+    height: 7%;
+    border-radius: 0%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    /*background-color: rgb(216, 213, 213);*/
+    
+}
+
+select{
+    width: 100%;
+    height: 7%;
+    border-radius: 0%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+form button{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 215px;
+}
+.formInfo{
+    /*position: absolute;
+    top: 750px;
+    margin-bottom: 75px;
+    margin-left: 110px;
+    */
+    bottom: 40px;
+    margin-right: 50px;
+
+}
+#hotelId{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    
+    
+}
+.enterinfoAbove{
+    margin-top: 15px;
+    
+}
+.textEditP{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.textEdit{
+    padding-top: 5px;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    margin-left: 20px;
+    border-top: white solid 1px;
+    width:90%
+}
+.apiInfo{
+    background-color: rgb(216, 213, 213);
+    height: 325px;
+    margin-top: 70px;
+    width: 1200px;
+}
+.inline{
+    display: inline-block;
+}
+.art img{
+    max-height: 600px;
+    max-width: 200px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+    /*border:greenyellow solid;*/
+}
+.artApple{
+    max-width: 325px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+.artApple h4{
+    margin: auto;}
+    .adjustHorse{
+        margin-left: 30px;
+    }
+.art h4{
+margin: auto;}
+.adjustHorse{
+    margin-left: 30px;
+}
+
+.selector{
+    /*margin-top: 450px;*/
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 30px;
+    
+}
+a h3{
+    color: rgb(216, 213, 213);
+}
+.is-active a h3{
+    color:rgb(0, 0, 0);
+}
+
+.listedInfo{
+    background-color: rgb(216, 213, 213);
+    /*height: 200px;*/
+    margin-top: 40px;
+    height: 500px;
+    width: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+footer{
+    height: 200px;
+}
+footer a{
+    margin-right: 40px;
+    margin-left: 40px;}
+footer img{
+    max-height: 75px;
+    max-width: 75px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+a{
+    color: rgb(175, 173, 173);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300
+}
+.infoFooter{
+padding-bottom: 25px;
+text-align: center;
+margin-top: 150px;
+margin-bottom: 50px;
+/*border: springgreen solid;*/
+}
+.bottomBorder{
+border-bottom: rgb(206, 206, 206) solid 1px;
+width: 70%;
+}
+#map{
+    height: 500px;
+    width: 1200px;
+    /*margin:auto;*/
+    background-color: rgb(42, 42, 51);
+    margin-top: 40px;
+    /*border-right: black solid;*/
+
+}
+/************************************************/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #000000;
+    margin: auto;
+    padding: 20px;
+    /*border: 1px solid #888;*/
+    width: 40%;
+    color:white;
+    border-radius: 10px;
+    
+  }
+  .modal p{
+      margin-top: 12px;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #city{
+    background-color: white;
+    margin-top: 20px;
+  }
