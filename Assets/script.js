@@ -1,3 +1,6 @@
+
+
+var distance;
 var yourMarker;
 var adress = "Westminster, London SW1A 1AA"
 var adress = "204 Freedom Trail, Boston, MA 02113"
@@ -17,8 +20,11 @@ var rideLongArray = [];
 beginRides = false;
 var rideFactor = 0;
 rides = false;
-bikeInfoArray = [];
-freeInfo = [];
+var freeInfo;
+var bikeInfoArray = [];
+var bikeAddress;
+var bikeAddressArray=[];
+var useAbleNum = 1;  
 /*********hotel items****************/
 var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
 var secret = "2eaQeSGY6hS7hpd6"; 
@@ -61,6 +67,9 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
       ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
+    /*console.log(d);*/
+    distance = d;
+    
     return d;
   }
   
@@ -295,7 +304,9 @@ function MakeMarkerRides(){
 
 }
 rideFactor ++;
-}}
+}
+
+}
 /****************************************************/    
     function MakeMarkerHotels(){console.log(hotelsArrayLat.length);
         for(var i = 0; i < hotelsArrayLat.length +1; i ++){
@@ -576,17 +587,10 @@ initMapH();
 else{ 
 if(hotelName!="TEST CONTENT"){
 hotelNameArray.push(hotelName);
-/*console.log(hotelsArrayLng);
-console.log(hotelsArrayLng);*/
+
 hotelsArrayLat.push(inputLat);
 hotelsArrayLng.push(inputLng);
-/*phoneNumbers.push(hotelPhone);*/
-/*console.log(inputLng);
-console.log(inputLat);*/
-/*console.log(hotelNameArray);*/
-/*console.log(hotelNameArray);*/
-/*factor ++;*/
-/*center();*/
+
 }
 
 }
@@ -648,10 +652,7 @@ function FindBikes(divInfo){
     }).then(function(data){
 
         for(var i = 0; i < data.networks.length; i ++)
-        {/*console.log(data.networks[i].location.city);*/
-            /*if(data.networks[i].location.city ==="London"){
-                console.log("found LON");
-            }*/
+        {
             
         if(data.networks[i].location.city === usableTerm)
         {
@@ -664,65 +665,47 @@ function FindBikes(divInfo){
             }).then(function(data){
                 rideFactor = 0;
                 for(var i = 0; i < data.network.stations.length; i++){
-                    /*console.log(data.network.stations[0].latitude);*/
-                    /*console.log(data.network.stations[i].latitude);
-                    console.log(data.network.stations[i].longitude); */ 
-                    /*console.log(data.network.stations[i].extra.address);   */  
-                    /*console.log(typeof data.network.stations[i].free_bikes);*/
-                    /*if(data.network.stations[i].free_bikes > 0){*/
-                        /*freeBikeInfo = data.network.stations[i].free_bikes;*/
+                   
                         latForRides = data.network.stations[i].latitude;
                         longForRides = data.network.stations[i].longitude;
-                        /*freeInfo.push(freeBikeInfo);*/
-                        /*bikeAddress = data.network.stations[i].extra.address;*/
-                        /*console.log(data.network.stations.length);*/
+                        getDistanceFromLatLonInKm(yourMarker.lat, yourMarker.lng, latForRides,longForRides);
                         
-                        /*var bikeInfoForFreeBikes = document.createElement("p");
-                        bikeInfoForFreeBikes.setAttribute("class", "textEditP");
-                        bikeInfoForFreeBikes.textContent = "hello"[i];
-                        divInfo.append(bikeInfoForFreeBikes);
-*/
-                        /*if(bikeAddress === null|| bikeAddress ===""){
-                            bikeAddress = "Address not given";
-                        }
-                        else{bikeInfoArray.push(bikeAddress)
-                        console.log(data.network.stations[i].extra.address);     
-                        console.log(data.network.stations[i].free_bikes);}*/
-
+                if(distance<=1){
                 if(rideLatArray.length === 0 && rideLongArray.length === 0){
                     rideLatArray[0]=latForRides;
                     rideLongArray[0]=longForRides;
-                
+                    bikeAddressArray[0] = data.network.stations[i].extra.name;
+                    bikeInfoArray[0] = data.network.stations[i].free_bikes;
                     beginRides = true;
-                    /*markers = [];*/
                     initMapR();
                     } 
                     else{rideLatArray.push(latForRides);
                     rideLongArray.push(longForRides);
+                     var address = (data.network.stations[i].extra.name);
+                     console.log(address);
+                   
+                    var info = data.network.stations[i].free_bikes;
                     
-                    
-                    /*rideFactor ++;*/
-                    }
-                
-                
-                }
-                MakeMarkerRides();
-                
-                /*console.log(data.networks[i].name);*/
-        
-               /*for(var i = 0; i < bikeInfoArray.length; i++){
-                var useAbleNum = i + 1;
-                var bikeInfoForFreeBikes = document.createElement("p");
-                bikeInfoForFreeBikes.setAttribute("class", "textEditP");
-                bikeInfoForFreeBikes.textContent = freeInfo[i];
+                    console.log(info);
+                   
 
-                var bikesAdress = document.createElement("h2");
-                bikesAdress.setAttribute("class", "textEdit");
-                bikesAdress.textContent = useAbleNum + ". " + bikeInfoArray[i];
+                    var bikesAdress = document.createElement("h2");
+                    bikesAdress.setAttribute("class", "textEdit");
+                    bikesAdress.textContent = useAbleNum + ". " + address;
+                    divInfo.append(bikesAdress); 
+
+                    var bikeInfoForFreeBikes = document.createElement("p");
+                    bikeInfoForFreeBikes.setAttribute("class", "textEditP");
+                    bikeInfoForFreeBikes.textContent = info + " " + "Free bikes";
+                    divInfo.append(bikeInfoForFreeBikes);
+                    useAbleNum++;   
+                        
+                    
+                    }
+                }
                 
-               console.log(bikesAdress);*/
-                /*divInfo.append(bikesAdress);*/
-              /* divInfo.append(bikeInfoForFreeBikes);*/
+            }
+                MakeMarkerRides();
     })
 }
 }
@@ -786,12 +769,7 @@ submitButton.addEventListener("click", function(event){
                 
             }
         }
-            /*else{setupFirst = true;
-            beginProcess = true;
-            console.log("else");*/
-            
-        
-    
+
 }else{
     console.log("not ready yet");
 }
