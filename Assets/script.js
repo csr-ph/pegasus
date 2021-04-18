@@ -688,14 +688,24 @@ function FindBikes(divInfo){
                     beginRides = true;
                     initMapR();
                     } 
-                else{rideLatArray.push(latForRides);
+                else{
+                    rideLatArray.push(latForRides);
                     rideLongArray.push(longForRides);
-                     var address = (data.network.stations[i].extra.name);
-                     console.log(address);
-                   
-                    var info = data.network.stations[i].free_bikes;
                     
-                    console.log(info);
+                    if(data.network.stations[i].extra.name != null){
+                        var address = data.network.stations[i].extra.name;}
+                       else if(data.network.stations[i].extra.address != null){
+                        /*console.log(data.network.stations[i].extra);*/
+                        var address = data.network.stations[i].extra.address;}
+                        if(data.network.stations[i].name != null){
+                           var address = data.network.stations[i].name;}
+                       
+                       if(data.network.stations[i].empty_slots != null){
+                           var info = data.network.stations[i].empty_slots;
+                        }
+                       else if(data.network.stations[i].free_bikes!=null){
+                           var info = data.network.stations[i].free_bikes;
+                       }
                    
 
                     var bikesAdress = document.createElement("h2");
@@ -743,6 +753,8 @@ function FindBikes(divInfo){
                     else if(data.network.stations[j].extra.address != null){
                      /*console.log(data.network.stations[j].extra);*/
                      var address = data.network.stations[j].extra.address;}
+                     if(data.network.stations[j].name != null){
+                        var address = data.network.stations[j].name;}
                     
                     if(data.network.stations[j].empty_slots != null){
                         var info = data.network.stations[j].empty_slots;

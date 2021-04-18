@@ -107,7 +107,7 @@ select{
     font-weight: 300;
 }
 #submit{
-    margin-top: 165px;
+    margin-top: 60px;
 }
 form button{
     font-family: 'Nunito Sans', sans-serif;
@@ -263,6 +263,14 @@ margin-bottom: 50px;
 .bottomBorder{
 border-bottom: rgb(206, 206, 206) solid 1px;
 width: 70%;
+}
+.underline{
+    border-bottom: white solid 1px;
+    padding-bottom: 5px;
+}
+.text{
+    margin-top: 5px;
+    margin-bottom: 5px
 }
 #map{
     height: 500px;
