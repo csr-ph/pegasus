@@ -1,92 +1,93 @@
 // wrap script in a document.ready function
 $(document).ready(function(){
   var markers = [];
-StopProcess = false;
-animating = false;
-setupFirst = true;
-beginProcess = false;
-var usableTerm;
-var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS"];
-var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
-/*********Ride items*****************/
-var latForRides = 100;
-var longForRides = 100;
-var rideLatArray = [];
-var rideLongArray = [];
-beginRides = false;
-var rideFactor = 0;
-rides = false;
-bikeInfoArray = [];
-freeInfo = [];
-/*********hotel items****************/
-var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
-var secret = "2eaQeSGY6hS7hpd6"; 
-var inputLat = 100;
-var inputLng = 100;    
-hotelsArrayLat = [100];
-hotelsArrayLng = [100];
-hotelNameArray = [];
-phoneNumbers = [];
-hotels= false;
-/********************/
-food = false;
-/********************/
-begin = false;
-var factor = 0;
-rides = false;
-food = false;
-hotels = false;
-var number = 0
-var cityValue = document.getElementById("city");
-var submitButton = document.getElementById("submit");
-/*active slot*/
-console.log(submitButton);
-var checkRides = document.getElementById("rides");
-
-var checkHotels = document.getElementById("hotels");
-var checkFood = document.getElementById("restaurants");
-
-var active = document.getElementById("holder");
-
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-/************************************/
-function animate(){ 
-  
-/********************************rides*/
-    if(rides){
-        rides = false;
-var myVar = setInterval(function(){
+    StopProcess = false;
+    setupFirst = true;
+    beginProcess = false;
+    var usableTerm;
+    var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS"];
+    var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
+    /*********Ride items*****************/
+    var latForRides = 100;
+    var longForRides = 100;
+    var rideLatArray = [];
+    var rideLongArray = [];
+    beginRides = false;
+    var rideFactor = 0;
+    rides = false;
+    bikeInfoArray = [];
+    freeInfo = [];
+    /*********hotel items****************/
+    var key = "lqnTXAQShBz0yPpYXTA6LKoOdtI7tFDy";
+    var secret = "2eaQeSGY6hS7hpd6"; 
+    var inputLat = 100;
+    var inputLng = 100;    
+    hotelsArrayLat = [100];
+    hotelsArrayLng = [100];
+    hotelNameArray = [];
+    phoneNumbers = [];
+    hotels= false;
+    /********************/
     
-    var bikes = document.getElementById("bikeId");
-    /*bikes.setAttribute("class", "enterInfoAbove has-text-centered");*/
-    if(number===0){number === number ++;
-    bikes.textContent = 'Finding bikes.';}
-    else if (number===1){number === number ++;
-        bikes.textContent = 'Finding bikes..';}
-    else if(number===2){number === number ++;
-            bikes.textContent = 'Finding bikes...';}
-            else if(number===3){number === number ++;
-                bikes.textContent = 'Finding bikes.....';}
-                else if(number===4){
-                    bikes.textContent = 'Found bikes in your area.';
-                    /*bikes.removeAttribute("class","has-text-centered");*/
-                    number = 0;  
-                    animating = false;
-                    clearInterval(myVar); 
+    beginFood = false;
+    food = false;
+    /********************/
+    begin = false;
+    var factor = 0;
+    rides = false;
+    food = false;
+    hotels = false;
+    var number = 0;
+    var cityValue = document.getElementById("city");
+    var submitButton = document.getElementById("submit");
+    /*active slot*/
+    console.log(submitButton);
+    var checkRides = document.getElementById("rides");
+    animating = false;
+
+    var checkFood = document.getElementById("restaurants");
+    var active = document.getElementById("holder");
+    var checkHotels = document.getElementById("hotels");
+    
+    
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+    // animation function
+    function animate(){ 
+  
+    // rides section
+        if(rides){
+            rides = false;
+            var myVar = setInterval(function(){
+    
+                var bikes = document.getElementById("bikeId");
+                /*bikes.setAttribute("class", "enterInfoAbove has-text-centered");*/
+                if(number===0){number === number ++;
+                bikes.textContent = 'Finding bikes.';}
+                else if (number===1){number === number ++;
+                    bikes.textContent = 'Finding bikes..';}
+                else if(number===2){number === number ++;
+                        bikes.textContent = 'Finding bikes...';}
+                        else if(number===3){number === number ++;
+                            bikes.textContent = 'Finding bikes.....';}
+                            else if(number===4){
+                                bikes.textContent = 'Found bikes in your area.';
+                                /*bikes.removeAttribute("class","has-text-centered");*/
+                                number = 0;  
+                                animating = false;
+                                clearInterval(myVar); 
                     
    
-                };
+                            }
     
-    console.log(number)
-    },
-    1000);
+                console.log(number);
+                },
+                1000);
     
-/*******************************hotels */
+// hotels section
 }else if(hotels){
         hotels = false;
         var myVar = setInterval(function(){
@@ -107,14 +108,14 @@ var myVar = setInterval(function(){
                             number = 0;  
                             animating = false;
                             clearInterval(myVar);
-                        };
+                        }
             
-            console.log(number)
+            console.log(number);
             },
             1000);
             
            
-/*************************food*/
+// food section
 }else if(food){
     food = false;
     var myVar = setInterval(function(){
@@ -135,16 +136,16 @@ var myVar = setInterval(function(){
                         number = 0;  
                         animating = false;
                         clearInterval(myVar);
-                    };
+                    }
         
-        console.log(number)
+        console.log(number);
         },
         1000);
         
 }
 
 }
-/**********************************/
+// initialize hotels map
 
 let mapH;
 function initMapH() {
@@ -158,8 +159,8 @@ function initMapH() {
         zoom: 13,
     });}
 }
-let mapR
-/**********************************/
+let mapR;
+// initialize rides map
 function initMapR() {
     markers = [];
     if(beginRides){
@@ -172,6 +173,18 @@ function initMapR() {
         zoom: 15,
     });}
 }
+let mapF;
+// initialize food map
+function initMapF() {
+    markers = [];
+    if(begin){
+        inputLat = parseFloat(foodArrayLat[factor]);
+        inputLng = parseFloat(foodArrayLng[factor]);
+        console.log(typeof inputLat);
+        mapF = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: inputLat, lng: inputLng },
+        zoom: 13,
+    });}
 /******************************************************* */
 function MakeMarkerRides(){
         /*console.log(factor);*/
@@ -250,7 +263,7 @@ function MakeMarkerRides(){
         FindBikes(divInfo);
         rides=true;
         markers = [];
-        var maps = document.getElementById("map")
+        var maps = document.getElementById("map");
         removeAllChildNodes(maps);
         animate();
         
@@ -292,7 +305,7 @@ function MakeMarkerRides(){
         food=true;
         markers = [];
         
-        var maps = document.getElementById("map")
+        var maps = document.getElementById("map");
         removeAllChildNodes(maps);
         animate();
         }  
@@ -332,7 +345,7 @@ function MakeMarkerRides(){
         hotels = true;
         markers = [];
         
-        var maps = document.getElementById("map")
+        var maps = document.getElementById("map");
         removeAllChildNodes(maps);
         animate();
         }  
@@ -341,7 +354,38 @@ function MakeMarkerRides(){
     }});
 /***************************API for food******************************/
 function runFood(divInfo){
+    const myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?&location=" + city;
 
+    $.ajax({
+       url: myurl,
+       headers: {
+        'Authorization':'Bearer QZ1THUpRKeMiusZGC5iYIZh1qbdmlpSr8yS1Hy3ZBobxNxs7Ks8YJDHsJfa4OWroUkJupEYEZwznc64mcNhX4AYq9Beu2PP9lLhCRllSmn0qY64d5RmjY6ERx-h5YHYx',
+    },
+       method: 'GET',
+       dataType: 'json',
+       success: function(data){
+           // Grab the results from the API JSON return
+           var totalresults = data.total;
+           // If our results are greater than 0, continue
+           if (totalresults > 0){
+               // Display a header on the page with the number of results
+               $('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
+               // Create an each loop to iterate through each item in the 'businesses' array
+               $.each(data.businesses, function(i, item) {
+                   // Store each business's object in a variable
+                   var id = item.id;
+                   var alias = item.alias;
+                   var phone = item.display_phone;
+                   var image = item.image_url;
+                   var name = item.name;
+                   var rating = item.rating;
+                   var reviewcount = item.review_count;
+                   var address = item.location.address1;
+                   var city = item.location.city;
+                   var state = item.location.state;
+                   var zipcode = item.location.zip_code;
+                   // Append our result into our page
+    }); 
     
     StopProcess = false;
 }
@@ -407,7 +451,7 @@ hotelName = hotelName.toUpperCase();
 if(hotelName!="TEST CONTENT"){
     var hotelPhone;
     if(data.data[i].hotel.contact === null){
-        hotelPhone = "Phone number not listed."
+        hotelPhone = "Phone number not listed.";
         phoneNumbers.push(hotelPhone);
     }
     else if(data.data[i].hotel.contact != null){
@@ -416,7 +460,7 @@ hotelPhone = data.data[i].hotel.contact.phone;
 phoneNumbers.push(hotelPhone);
 }
 else{
-    hotelPhone = "Phone number not listed."
+    hotelPhone = "Phone number not listed.";
 }
 }
 if(i==0){
@@ -457,7 +501,7 @@ console.log(phoneNumbers);*/
 for(var i = 0; i < hotelNameArray.length; i++){
 var ListOfHotels = document.createElement("h2");
 var phoneNum = document.createElement("p");
-phoneNum.setAttribute("class", "textEditP")
+phoneNum.setAttribute("class", "textEditP");
 useAbleNum = i + 1;
 ListOfHotels.setAttribute("class", "textEdit");
 ListOfHotels.textContent = useAbleNum + ". " + hotelNameArray[i];
@@ -475,11 +519,11 @@ console.log('something went wrong', err);
 }
 StopProcess = false;
 
-};
+}
 /*************************Api for bikes******************************/
 function FindBikes(divInfo){
     
-    bikeInfoArray = []
+    bikeInfoArray = [];
     hotelsArrayLat = [];
     hotelsArrayLng = [];
     hotelNameArray = [];
@@ -575,10 +619,10 @@ function FindBikes(divInfo){
                console.log(bikesAdress);*/
                 /*divInfo.append(bikesAdress);*/
               /* divInfo.append(bikeInfoForFreeBikes);*/
-    })
+    });
 }
 }
-})
+});
 StopProcess = false;
 
 }
@@ -589,7 +633,7 @@ submitButton.addEventListener("click", function(event){
     console.log(cityValue.value);
     beginProcess = false;
     if(cityValue.value === null||cityValue.value === ""){
-    console.log("no value")}
+    console.log("no value");}
     else{
         /*if(setupFirst){*/
             
@@ -634,7 +678,7 @@ submitButton.addEventListener("click", function(event){
     console.log("not ready yet");
 }}
 );
-/******************************pop up modal for learn more***********************************/
+// pop up modal for "Learn More"
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -647,19 +691,20 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
   modal.style.display = "block";
-}
+};
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
+}
 });
