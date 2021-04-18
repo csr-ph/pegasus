@@ -28,7 +28,7 @@ $(document).ready(function(){
     phoneNumbers = [];
     hotels= false;
     /********************/
-    
+    foodNameArray = [];
     beginFood = false;
     food = false;
     /********************/
@@ -286,18 +286,18 @@ function MakeMarkerRides(){
     }else{
         console.log("not found activeElement");
     }
-    if(checkRides.hasAttribute("class","is-active")||checkHotels.hasAttribute("class","is-active")){
-    checkRides.removeAttribute("class","is-active");
-    checkHotels.removeAttribute("class","is-active");
+    if(checkRides.hasAttribute("class", "is-active")||checkHotels.hasAttribute("class", "is-active")){
+    checkRides.removeAttribute("class", "is-active");
+    checkHotels.removeAttribute("class", "is-active");
     console.log("found");
     }
     else{console.log("not found");
     }
-        checkFood.setAttribute("class","is-active");
+        checkFood.setAttribute("class", "is-active");
 
         var divInfo = document.createElement("div");
         
-        divInfo.setAttribute("class","is-active-element listedInfo");
+        divInfo.setAttribute("class", "is-active-element listedInfo");
         active.append(divInfo);
         if(beginProcess){
         divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove' id = 'foodId'>Finding food</h3>";
@@ -321,33 +321,33 @@ function MakeMarkerRides(){
     var activeElement = document.querySelector(".is-active-element");
     if(activeElement){
         activeElement.remove();
-    console.log(activeElement);
+        console.log(activeElement);
     }else{
         console.log("not found activeElement");
     }
-    if(checkFood.hasAttribute("class","is-active")||checkRides.hasAttribute("class","is-active")){
-    checkFood.removeAttribute("class","is-active");
-    checkRides.removeAttribute("class","is-active");
-    console.log("found");
+    if(checkFood.hasAttribute("class", "is-active")||checkRides.hasAttribute("class", "is-active")){
+        checkFood.removeAttribute("class", "is-active");
+        checkRides.removeAttribute("class", "is-active");
+        console.log("found");
     }
     else{console.log("not found");
     }
     
-        checkHotels.setAttribute("class","is-active");
+        checkHotels.setAttribute("class", "is-active");
 
         var divInfo = document.createElement("div");
-        divInfo.setAttribute("class","is-active-element listedInfo");
+        divInfo.setAttribute("class", "is-active-element listedInfo");
         active.append(divInfo);
         if(beginProcess){
-        divInfo.innerHTML= "<h3 class='has-text-centered' id = 'hotelId'>Finding hotels</h3>";
-        /*divInfo.innerHTML= cityValue.value;*/
-        runHotels(divInfo);
-        hotels = true;
-        markers = [];
+            divInfo.innerHTML= "<h3 class='has-text-centered' id = 'hotelId'>Finding hotels</h3>";
+            /*divInfo.innerHTML= cityValue.value;*/
+            runHotels(divInfo);
+            hotels = true;
+            markers = [];
         
-        var maps = document.getElementById("map");
-        removeAllChildNodes(maps);
-        animate();
+            var maps = document.getElementById("map");
+            removeAllChildNodes(maps);
+            animate();
         }  
         else{
             divInfo.innerHTML= "<h3 class='has-text-centered enterinfoAbove'>Enter information above.</h3>";}   
@@ -359,18 +359,17 @@ function runFood(divInfo){
     $.ajax({
        url: myurl,
        headers: {
-        'Authorization':'Bearer QZ1THUpRKeMiusZGC5iYIZh1qbdmlpSr8yS1Hy3ZBobxNxs7Ks8YJDHsJfa4OWroUkJupEYEZwznc64mcNhX4AYq9Beu2PP9lLhCRllSmn0qY64d5RmjY6ERx-h5YHYx',
+        'Authorization': 'Bearer QZ1THUpRKeMiusZGC5iYIZh1qbdmlpSr8yS1Hy3ZBobxNxs7Ks8YJDHsJfa4OWroUkJupEYEZwznc64mcNhX4AYq9Beu2PP9lLhCRllSmn0qY64d5RmjY6ERx-h5YHYx',
     },
        method: 'GET',
        dataType: 'json',
        success: function(data){
            // Grab the results from the API JSON return
            var totalresults = data.total;
+           console.log(data);
            // If our results are greater than 0, continue
            if (totalresults > 0){
-               // Display a header on the page with the number of results
-               $('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
-               // Create an each loop to iterate through each item in the 'businesses' array
+               // Create a loop to iterate through each item in the 'businesses' array
                $.each(data.businesses, function(i, item) {
                    // Store each business's object in a variable
                    var id = item.id;
@@ -378,13 +377,26 @@ function runFood(divInfo){
                    var phone = item.display_phone;
                    var image = item.image_url;
                    var name = item.name;
+                   console.log(name);
                    var rating = item.rating;
                    var reviewcount = item.review_count;
                    var address = item.location.address1;
                    var city = item.location.city;
                    var state = item.location.state;
                    var zipcode = item.location.zip_code;
-                   // Append our result into our page
+                   
+                   for(var i = 0; i < name.length; i++){
+                       var listOfFood = document.createElement("h2");
+                       var foodPhone = document.createElement("p");
+                       listOfFood.setAttribute("class", "textEdit");
+                       foodPhone.setAttribute("class", "textEditP");
+                       foodPhone.textContent = phoneNumbers[i];
+                       useAbleNum = i + 1;
+                       listOfFood.textContent = useAbleNum + ". " + foodNameArray;
+                       divInfo.append(listOfFood);
+                       divInfo.append(foodPhone);
+                   }
+
     }); 
     
     StopProcess = false;
@@ -708,3 +720,4 @@ window.onclick = function(event) {
 /*AIzaSyBEZNr5D8vA25MXqquK2LK2srC48P9czUA*/
 }
 });
+}}})
