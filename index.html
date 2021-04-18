@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="Assets/style.css">
+    <title>Pegasus</title>
+</head>
+<body>
+    <div class="columns">
+        <div class="column blackGutterOne"></div>
+        <div class="column blackGutterTwo"></div> 
+    </div>
+    <div class="mainDiv container is-multiline">
+     
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <img src="./Assets/pegasus logo.png" alt="logo" id="home">
+            
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start is-align-items-flex-end textAlign"><!--is-align-items-flex-end pushes text to baseline-->
+                    <a class="navbar-item" href="#nav">
+                        Navigation
+                    </a>
+            
+                    <!--<a class="navbar-item">
+                        Documentation
+                        
+                    </a>-->
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                        Documentation
+                        </a>
+            
+                        <div class="navbar-dropdown">
+                        <a href="http://api.citybik.es/v2/" target="blank" class="navbar-item">
+                           City Bikes 
+                        </a>
+                        
+                        <a href="https://developers.amadeus.com/" target="blank" class="navbar-item">
+                            Amadeus
+                        </a>
+                        <!--<hr class="navbar-divider">-->
+                        <a href="https://developers.google.com/maps/documentation/javascript/overview"  target="blank" class="navbar-item">
+                            Google Maps
+                        </a>
+                        </div>
+                    </div>
+                    <!----------------------------------------------->
+                    <!--<div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                        More
+                        </a>
+            
+                        <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            About
+                        </a>
+                        
+                        <a class="navbar-item">
+                            Contact
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Report an issue
+                        </a>
+                        </div>
+                    </div>-->
+                    <!----------------------------------------------->
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="columns">
+            
+            
+            <div class ="columns is-centered">
+            <!--size one refers to text size-->
+            <div class = "mainPic is-size-1 column is-9">
+                <img src="./Assets/pegasus.png" alt="main image" >
+                <h2 class = "bottom-left">GET WHISKED AWAY</h2>
+            </div>
+            </div>
+            
+            
+        </div> <!---------------------------------------------------------->
+    <div class="container formInfo" id = "nav">
+        <div class="columns is-centered is-multiline">
+            <div class="column is-3 leftSideInfo">
+                <h3>What is Pegasus?</h3>
+                <p>Much like it's namesake, a mythical winged divine horse, Pegasus assists you in your travels to save time planning your trips.</p>
+                <h3>Why Choose Pegasus?</h3>
+                <p> Pegasus streamlines information with one click with your most importent needs coming first by easily navigating the interface.</p>
+                <button id="myBtn" class= "button is-black learnMore" type="submit">Learn More</button>
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Enter the destination city or if your already there enter your address to find the nearest areas of interest </p>
+                    </div>
+                  
+                  </div>
+                  <!------------------------------------>
+            </div>
+            <form class="column is-3">
+                <p>Ride With Pegasus</p>
+                <!--<p>Sign Up</p><br>
+                <input type="text" id="yourName" name="yourName" placeholder=" First Name    Last Name"><br>-->
+                <!--<label for="city">Enter Your City</label><br>-->
+                <!----<input type="text" id="city" name="city" placeholder="Enter Your City"><br>-->
+                <select name="city" id="city"><br>
+                    <option value="" disabled selected>Enter Your Destination City</option>
+                    <option value="LON">London</option>
+                    <option value="ATL">Atlanta, GA</option>
+                    <option value="TPA">Tampa</option>
+                    <option value="NYC">New York City</option>
+                    <option value="LAX">Los Angeles</option>
+                    <option value="DEN">Denver</option>
+                    <option value ="BOS">Boston</option>
+                  </select>
+                <!--<label for="food">What Are You Craving</label><br>-->
+                <input type="text" id="current-location" name="current-location" placeholder="Point of Interest Address"><br>
+                <p class = "underline">Popular Searches</p>
+                <p class="text">Buckingham Palace Road-London</p>
+                <p class="text">Denver Art Museum-Denver</p>
+                <p class="text">Griffith Observatory-Los Angeles</p>
+                <button class="button is-black" type="click" id = "submit">Show me my trip</button><br>
+                <button class="button buttonPrevious is-black" type="click" id = "previous">Previous searches</button>
+                <div id="previousModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content-previous">
+                      <span class="pclose">&times;</span>
+                      
+                    </div>
+                  
+                  </div>
+                  <!--------------------------------------------------------------->
+                
+                
+            </form>
+        </div>
+    </div>
+        
+    </div>
+   
+    <!----------------------------------------------------->
+    <div class="tabs is-centered is-boxed is-medium selector">
+        <ul>
+          <li id = "rides" class = "is-active">
+            <a> 
+              <h3>Rides</h3>
+            </a>
+            
+          </li>
+          
+          <li id = "restaurants">
+            <a>
+              <h3>Food</h3>
+            </a>
+          </li>
+
+          <li id = "hotels">
+            <a>
+                <h3>Hotels</h3>
+            </a>
+          </li>
+          
+          <!--<li id = "bathrooms">
+            <a>
+                <h3>Restrooms</h3>
+            </a>
+          </li>-->
+
+          
+          
+        </ul>
+      </div>
+    <!------------------------------------------------------->
+                <div class = "container">
+                    <div>
+                        <div class = "columns is-centered" id = "holder">
+                            <div id = "map"></div>
+                            <div class="is-active-element listedInfo">
+                                <h3 class = "has-text-centered enterinfoAbove">Enter information above.</h3>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+    <!------------------------------------------------------->
+    <div class = "container apiInfo">
+        <div class=" columns is-centered ">
+            <div class>
+                <div class="column art inline">
+                    <img src="./Assets/horse.png" alt="horse">
+                    <h4>Choose the right ride tailored to your specs.</h4>
+                </div>
+                <div class="column art inline">
+                    <img src="./Assets/greek.png">
+                    <h4 >Find accomodation to stay while you travel.</h4>
+                </div>
+                <div class="column inline artApple">
+                    <img src="./Assets/apple.png">
+                    <h4 >Find food on the go to keep you fueled.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class = "container">
+            <div class = "columns is-centered">
+                <div class = "column infoFooter">
+                    <a href="#home">Home</a>
+                    <a href="#nav">Navigation</a>
+                    <a href="#map">Maps</a>
+                </div>
+                <!--<div class = "column is-2 infoFooter">
+                    <a>info</a><br>
+                    <a>info</a><br>
+                    <a>info</a><br>
+
+                </div>-->
+            </div>
+        </div>
+        <div class="columns is-centered">
+        <div class = "bottomBorder"></div>
+        </div>
+        <img src="./Assets/pegasus logo.png" alt="logo">
+    </footer>
+    <script src="./Assets/script.js"></script>
+    <!--<script src="./Assets/testApi.js"></script>-->
+    <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDZprocu6T52CA1VZR6LlvdZb_OB0X2jeY"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</body>
+</html>

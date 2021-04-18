@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    
+    <script src="./geolocateTest.js"></script>
+  </head>
+  <body>
+   
+    <script>
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway&key=AIzaSyB4oWBt6y4Uj1PPGR5T66y2gb3oojz0XCo").then(function(response){
+    return response.json()
+    .then(function(data){
+        console.log(data.results[0].geometry.location);
+    console.log("hello");
+})});
+    
+    </script>
+  </body>
+</html>
