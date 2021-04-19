@@ -5,7 +5,7 @@ $(document).ready(function(){
     setupFirst = true;
     beginProcess = false;
     var usableTerm;
-    var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS"];
+    var hardCoded = ["LON", "PHX", "LAX", "NYC", "DEN", "BOS" , test];
     var realNames = ["London", "Phoenix, AZ", "Los Angeles, CA", "New York, NY", "Denver, CO", "Boston, MA"];
     /*********Ride items*****************/
     var latForRides = 100;
