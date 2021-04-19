@@ -9,6 +9,7 @@
 * Pegasus uses Google Maps API for map displays,
 * Amadeus API for hotels
 * CityBikes API for bike rentals.
+* Yelp API for restaurant search.
 * Bulma for CSS framework and media queries.
 
 ## Where can I find it?
